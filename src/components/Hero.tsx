@@ -1,6 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
 import { ArrowRight, Mail } from 'lucide-react';
-import avatarImg from '../assets/avatar.png';
+import avatarImg from '../assets/profile.jpg';
 import './Hero.css';
 
 interface SocialIconProps extends React.SVGProps<SVGSVGElement> {
@@ -68,7 +68,7 @@ export default function Hero() {
     <section id="home" className="hero-section section">
       <div className="bg-blob blob-1"></div>
       <div className="bg-blob blob-2"></div>
-      
+
       <div className="container hero-container">
         <motion.div
           className="hero-text"
@@ -125,7 +125,7 @@ export default function Hero() {
             <div className="avatar-glow"></div>
             <div className="avatar-ring"></div>
             <img src={avatarImg} alt="Aiswarya Babu" className="avatar-img" />
-            
+
             {/* Orbiting floaters */}
             <motion.div className="floating-tech tech-react glass-panel" variants={floatVariants} animate="animate">
               🐍 Python

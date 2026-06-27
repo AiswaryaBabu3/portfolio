@@ -25,10 +25,10 @@ export default function About() {
       icon: <Database size={18} />,
       skills: [
         { name: 'Python', level: 95 },
-        { name: 'FastAPI', level: 90 },
-        { name: 'REST APIs & Integrations', level: 92 },
-        { name: 'Microservices Architecture', level: 85 },
-        { name: 'Scalable System Design', level: 88 },
+        { name: 'FastAPI', level: 93 },
+        { name: 'Microservices Architecture', level: 88 },
+        { name: 'OpenAI Integration', level: 85 },
+        { name: 'Printer Background Services', level: 80 },
       ],
     },
     {
@@ -37,8 +37,8 @@ export default function About() {
       icon: <Cpu size={18} />,
       skills: [
         { name: 'PostgreSQL', level: 90 },
-        { name: 'MongoDB', level: 85 },
-        { name: 'Redis', level: 82 },
+        { name: 'MongoDB', level: 86 },
+        { name: 'Redis', level: 84 },
         { name: 'NoSQL Databases', level: 80 },
         { name: 'Relational Architecture', level: 88 },
       ],
@@ -49,7 +49,7 @@ export default function About() {
       icon: <Settings size={18} />,
       skills: [
         { name: 'Subdomain Multi-tenancy', level: 90 },
-        { name: 'Stripe Payment Systems', level: 85 },
+        { name: 'Stripe Payment Systems', level: 88 },
         { name: 'Real-time APIs (Fyers API)', level: 88 },
         { name: 'Git & Version Control', level: 92 },
       ],
@@ -59,10 +59,10 @@ export default function About() {
       label: 'Frontend & UI',
       icon: <Layout size={18} />,
       skills: [
-        { name: 'React.js', level: 75 },
+        { name: 'React.js & TypeScript', level: 85 },
+        { name: 'JavaScript & ViteJS', level: 88 },
         { name: 'HTML5 & CSS3', level: 85 },
         { name: 'Responsive Web Design', level: 90 },
-        { name: 'Dynamic Forms & Validation', level: 80 },
       ],
     },
   ];
@@ -88,10 +88,10 @@ export default function About() {
           <div className="about-info">
             <h3 className="about-heading">Scaling backend infrastructures & robust APIs.</h3>
             <p className="about-text">
-              I am a Senior Software Developer with 2+ years of experience building scalable backend systems, AI examination portals, and online trading brokerages using Python and FastAPI.
+              I am a Senior Software Developer at Aagnia Technologies with a solid foundation in BCom IT and extensive training in full-stack web development (MERN). I have 2+ years of professional experience building scalable backend systems, AI examination portals, and online trading brokerages.
             </p>
             <p className="about-text">
-              I specialize in API architecture, payment integrations, multi-tenant databases, and real-time low-latency communication networks. I enjoy turning complex system designs into clean, maintainable microservices.
+              My expertise spans Python, FastAPI, React, and TypeScript. I specialize in API architecture, payment integrations, multi-tenant databases, microservices, and real-time communication systems.
             </p>
 
             <div className="stats-grid">
