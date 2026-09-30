@@ -1,5 +1,5 @@
 import { motion, type Variants } from 'framer-motion';
-import { ArrowRight, Mail, Download, Eye } from 'lucide-react';
+import { ArrowRight, Mail, Download, Eye, Sparkles, Move } from 'lucide-react';
 import avatarImg from '../assets/profile.jpg';
 import './Hero.css';
 
@@ -59,7 +59,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
   const floatVariants1: Variants = {
     animate: {
-      y: [0, -12, 0],
+      y: [0, -10, 0],
       transition: {
         duration: 4,
         repeat: Infinity,
@@ -70,7 +70,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
   const floatVariants2: Variants = {
     animate: {
-      y: [0, 12, 0],
+      y: [0, 10, 0],
       transition: {
         duration: 4.5,
         repeat: Infinity,
@@ -100,7 +100,8 @@ export default function Hero({ onOpenResume }: HeroProps) {
         >
           <motion.div className="hero-badge glass-panel" variants={itemVariants}>
             <span className="badge-pulse"></span>
-            Senior Software Developer • 2+ Years Experience
+            <Sparkles size={14} style={{ color: '#fbbf24' }} />
+            Choreographing Scalable Architecture • Senior Software Developer
           </motion.div>
 
           <motion.h1 className="hero-title" variants={itemVariants}>
@@ -186,27 +187,84 @@ export default function Hero({ onOpenResume }: HeroProps) {
           </motion.div>
         </motion.div>
 
+        {/* 3D Stage Visual & Draggable Elements */}
         <motion.div
           className="hero-visual"
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, type: 'spring', stiffness: 50 }}
         >
+          {/* 3D Illuminated Stage Floor Podium */}
+          <div className="stage-podium-3d">
+            <div className="stage-podium-ring"></div>
+          </div>
+
           <div className="avatar-wrapper">
             <div className="avatar-glow"></div>
             <div className="avatar-ring"></div>
             <img src={avatarImg} alt="Aiswarya Babu" className="avatar-img" />
 
-            {/* Orbiting Tech Badges */}
-            <motion.div className="floating-tech tech-react glass-panel" variants={floatVariants1} animate="animate">
+            {/* Draggable Interactive 3D Tech Badges */}
+            <motion.div
+              drag
+              dragConstraints={{ top: -80, bottom: 80, left: -100, right: 100 }}
+              dragElastic={0.2}
+              whileDrag={{ scale: 1.15, zIndex: 50, cursor: 'grabbing' }}
+              whileHover={{ scale: 1.08, cursor: 'grab' }}
+              className="floating-tech tech-react glass-panel"
+              variants={floatVariants1}
+              animate="animate"
+              title="Click and drag me!"
+            >
               🐍 Python & FastAPI
             </motion.div>
-            <motion.div className="floating-tech tech-ts glass-panel" variants={floatVariants2} animate="animate">
+
+            <motion.div
+              drag
+              dragConstraints={{ top: -80, bottom: 80, left: -100, right: 100 }}
+              dragElastic={0.2}
+              whileDrag={{ scale: 1.15, zIndex: 50, cursor: 'grabbing' }}
+              whileHover={{ scale: 1.08, cursor: 'grab' }}
+              className="floating-tech tech-ts glass-panel"
+              variants={floatVariants2}
+              animate="animate"
+              title="Click and drag me!"
+            >
               🤖 GenAI & LLMs (GPT-4o)
             </motion.div>
-            <motion.div className="floating-tech tech-node glass-panel" variants={floatVariants1} animate="animate">
+
+            <motion.div
+              drag
+              dragConstraints={{ top: -80, bottom: 80, left: -100, right: 100 }}
+              dragElastic={0.2}
+              whileDrag={{ scale: 1.15, zIndex: 50, cursor: 'grabbing' }}
+              whileHover={{ scale: 1.08, cursor: 'grab' }}
+              className="floating-tech tech-node glass-panel"
+              variants={floatVariants1}
+              animate="animate"
+              title="Click and drag me!"
+            >
               ⚡ Redis & WebSockets
             </motion.div>
+
+            <motion.div
+              drag
+              dragConstraints={{ top: -80, bottom: 80, left: -100, right: 100 }}
+              dragElastic={0.2}
+              whileDrag={{ scale: 1.15, zIndex: 50, cursor: 'grabbing' }}
+              whileHover={{ scale: 1.08, cursor: 'grab' }}
+              className="floating-tech tech-fyers glass-panel"
+              variants={floatVariants2}
+              animate="animate"
+              title="Click and drag me!"
+            >
+              📈 Fyers Trading OMS
+            </motion.div>
+
+            {/* Hint to drag elements */}
+            <div className="drag-hint-badge">
+              <Move size={12} /> Drag badges around stage
+            </div>
           </div>
         </motion.div>
       </div>

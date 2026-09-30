@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink } from 'lucide-react';
+import { X, ExternalLink, ChevronLeft, ChevronRight, MoveHorizontal, LayoutGrid, Sparkles } from 'lucide-react';
 import everestTutoringImg from '../assets/everest-tutoring.png';
 import invetaaImg from '../assets/invetaa-trading.png';
 import everestBookingImg from '../assets/everest-booking.png';
+import TiltCard from './TiltCard';
 import './Projects.css';
 
 interface SocialIconProps extends React.SVGProps<SVGSVGElement> {
@@ -35,6 +36,11 @@ interface Project {
 export default function Projects() {
   const [filter, setFilter] = useState<'all' | 'ai' | 'fintech' | 'saas' | 'backend'>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
+  const [dragWidth, setDragWidth] = useState(0);
+
+  const carouselViewportRef = useRef<HTMLDivElement>(null);
+  const carouselTrackRef = useRef<HTMLDivElement>(null);
 
   const projects: Project[] = [
     {
@@ -133,6 +139,24 @@ export default function Projects() {
     { id: 'backend', label: 'Backend Daemons' },
   ];
 
+  // Calculate carousel scroll bounds
+  useEffect(() => {
+    if (carouselTrackRef.current && carouselViewportRef.current) {
+      const scrollWidth = carouselTrackRef.current.scrollWidth;
+      const clientWidth = carouselViewportRef.current.clientWidth;
+      setDragWidth(Math.max(0, scrollWidth - clientWidth + 30));
+    }
+  }, [filteredProjects, viewMode]);
+
+  const handleSlide = (direction: 'left' | 'right') => {
+    if (!carouselViewportRef.current) return;
+    const scrollAmount = 400;
+    carouselViewportRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <section id="projects" className="projects-section section">
       <div className="container">
@@ -143,64 +167,166 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* Filter Buttons */}
-        <div className="projects-filters">
-          {filterTabs.map((tab) => (
+        {/* Top Controls Bar: Filter & 3D Stage View Switcher */}
+        <div className="projects-controls-bar">
+          <div className="projects-filters">
+            {filterTabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setFilter(tab.id as any)}
+                className={`filter-btn ${filter === tab.id ? 'active' : ''}`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="view-mode-toggle">
             <button
-              key={tab.id}
-              onClick={() => setFilter(tab.id as any)}
-              className={`filter-btn ${filter === tab.id ? 'active' : ''}`}
+              onClick={() => setViewMode('carousel')}
+              className={`toggle-btn ${viewMode === 'carousel' ? 'active' : ''}`}
+              title="3D Draggable Stage Carousel"
             >
-              {tab.label}
+              <Sparkles size={14} /> 3D Stage
             </button>
-          ))}
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`toggle-btn ${viewMode === 'grid' ? 'active' : ''}`}
+              title="Grid View"
+            >
+              <LayoutGrid size={14} /> Grid
+            </button>
+          </div>
         </div>
 
-        {/* Grid Layout */}
-        <motion.div layout className="projects-grid">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
+        {/* 3D DRAGGABLE STAGE CAROUSEL VIEW */}
+        {viewMode === 'carousel' ? (
+          <div className="stage-carousel-wrapper">
+            <div className="carousel-drag-hint">
+              <MoveHorizontal size={15} /> Click & drag to glide through projects on stage
+            </div>
+
+            <div className="stage-carousel-viewport" ref={carouselViewportRef}>
               <motion.div
-                layout
-                key={project.id}
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.92 }}
-                transition={{ duration: 0.3 }}
-                className="project-card glass-card"
-                onClick={() => setSelectedProject(project)}
+                ref={carouselTrackRef}
+                drag="x"
+                dragConstraints={{ right: 0, left: -dragWidth }}
+                dragElastic={0.15}
+                className="carousel-track"
               >
-                <div
-                  className={`project-thumbnail ${project.imageUrl ? 'has-image' : ''}`}
-                  style={!project.imageUrl ? { background: project.image } : undefined}
-                >
-                  {project.imageUrl && (
-                    <img
-                      src={project.imageUrl}
-                      alt={project.title}
-                      className="project-thumb-img"
-                    />
-                  )}
-                  <div className="project-category-tag">{project.badge}</div>
-                </div>
-                
-                <div className="project-info">
-                  <h3 className="project-title">{project.title}</h3>
-                  <p className="project-desc">{project.description}</p>
-                  
-                  <div className="project-tags">
-                    {project.tags.slice(0, 4).map((tag, i) => (
-                      <span key={i} className="project-tag">{tag}</span>
-                    ))}
-                    {project.tags.length > 4 && (
-                      <span className="project-tag">+{project.tags.length - 4}</span>
-                    )}
+                {filteredProjects.map((project) => (
+                  <div key={project.id} className="carousel-card-item">
+                    <TiltCard maxTilt={14} onClick={() => setSelectedProject(project)}>
+                      <div className="project-card glass-card">
+                        <div
+                          className={`project-thumbnail ${project.imageUrl ? 'has-image' : ''}`}
+                          style={!project.imageUrl ? { background: project.image } : undefined}
+                        >
+                          {project.imageUrl && (
+                            <img
+                              src={project.imageUrl}
+                              alt={project.title}
+                              className="project-thumb-img"
+                              draggable={false}
+                            />
+                          )}
+                          <div className="project-category-tag">{project.badge}</div>
+                        </div>
+
+                        <div className="project-info">
+                          <h3 className="project-title">{project.title}</h3>
+                          <p className="project-desc">{project.description}</p>
+
+                          <div className="project-tags">
+                            {project.tags.slice(0, 4).map((tag, i) => (
+                              <span key={i} className="project-tag">{tag}</span>
+                            ))}
+                            {project.tags.length > 4 && (
+                              <span className="project-tag">+{project.tags.length - 4}</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </TiltCard>
                   </div>
-                </div>
+                ))}
               </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+            </div>
+
+            {/* Navigation Arrow Controls */}
+            <div className="carousel-nav-controls">
+              <button
+                onClick={() => handleSlide('left')}
+                className="carousel-nav-btn"
+                aria-label="Previous Project"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <span style={{ fontSize: '13px', color: 'var(--text-muted)', fontWeight: 600 }}>
+                {filteredProjects.length} Projects on Stage
+              </span>
+              <button
+                onClick={() => handleSlide('right')}
+                className="carousel-nav-btn"
+                aria-label="Next Project"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+
+            {/* Stage Floor Reflection Glow */}
+            <div className="projects-stage-glow"></div>
+          </div>
+        ) : (
+          /* GRID VIEW WITH 3D TILT */
+          <motion.div layout className="projects-grid">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project) => (
+                <motion.div
+                  layout
+                  key={project.id}
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <TiltCard maxTilt={14} onClick={() => setSelectedProject(project)}>
+                    <div className="project-card glass-card">
+                      <div
+                        className={`project-thumbnail ${project.imageUrl ? 'has-image' : ''}`}
+                        style={!project.imageUrl ? { background: project.image } : undefined}
+                      >
+                        {project.imageUrl && (
+                          <img
+                            src={project.imageUrl}
+                            alt={project.title}
+                            className="project-thumb-img"
+                            draggable={false}
+                          />
+                        )}
+                        <div className="project-category-tag">{project.badge}</div>
+                      </div>
+
+                      <div className="project-info">
+                        <h3 className="project-title">{project.title}</h3>
+                        <p className="project-desc">{project.description}</p>
+
+                        <div className="project-tags">
+                          {project.tags.slice(0, 4).map((tag, i) => (
+                            <span key={i} className="project-tag">{tag}</span>
+                          ))}
+                          {project.tags.length > 4 && (
+                            <span className="project-tag">+{project.tags.length - 4}</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </TiltCard>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
       </div>
 
       {/* Details Modal */}
@@ -235,7 +361,7 @@ export default function Projects() {
 
               <div className="modal-body">
                 <h3 className="modal-title">{selectedProject.title}</h3>
-                
+
                 <div className="modal-tags">
                   {selectedProject.tags.map((tag, i) => (
                     <span key={i} className="project-tag">{tag}</span>

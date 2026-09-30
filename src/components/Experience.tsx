@@ -1,5 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
 import { Briefcase, GraduationCap, Award, MapPin } from 'lucide-react';
+import TiltCard from './TiltCard';
 import './Experience.css';
 
 interface TimelineItem {
@@ -105,33 +106,36 @@ export default function Experience() {
                 </div>
               </div>
 
-              {/* Timeline Content Card */}
+              {/* Timeline Content Card with 3D Tilt */}
               <motion.div
-                className="timeline-card glass-panel"
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: '-60px' }}
                 custom={index}
               >
-                <div className="timeline-card-header">
-                  <span className="timeline-period">{item.period}</span>
-                  <h3 className="timeline-role">{item.title}</h3>
-                  <div className="timeline-org-row">
-                    <h4 className="timeline-org">{item.organization}</h4>
-                    {item.location && (
-                      <span className="timeline-location">
-                        <MapPin size={13} /> {item.location}
-                      </span>
-                    )}
+                <TiltCard maxTilt={8}>
+                  <div className="timeline-card glass-panel">
+                    <div className="timeline-card-header">
+                      <span className="timeline-period">{item.period}</span>
+                      <h3 className="timeline-role">{item.title}</h3>
+                      <div className="timeline-org-row">
+                        <h4 className="timeline-org">{item.organization}</h4>
+                        {item.location && (
+                          <span className="timeline-location">
+                            <MapPin size={13} /> {item.location}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <ul className="timeline-desc-list">
+                      {item.description.map((bullet, i) => (
+                        <li key={i} className="timeline-bullet">{bullet}</li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-                
-                <ul className="timeline-desc-list">
-                  {item.description.map((bullet, i) => (
-                    <li key={i} className="timeline-bullet">{bullet}</li>
-                  ))}
-                </ul>
+                </TiltCard>
               </motion.div>
             </div>
           ))}

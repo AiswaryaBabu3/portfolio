@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, Database, Layout, Sparkles, TrendingUp, ShieldCheck, GraduationCap, Award, Globe2 } from 'lucide-react';
+import TiltCard from './TiltCard';
 import './About.css';
 
 interface Skill {
@@ -134,38 +135,46 @@ export default function About() {
 
             <div className="stats-grid">
               {stats.map((stat, i) => (
-                <div key={i} className="stat-card glass-panel">
-                  <span className="stat-value text-gradient-accent">{stat.value}</span>
-                  <span className="stat-label">{stat.label}</span>
-                </div>
+                <TiltCard key={i} maxTilt={10}>
+                  <div className="stat-card glass-panel">
+                    <span className="stat-value text-gradient-accent">{stat.value}</span>
+                    <span className="stat-label">{stat.label}</span>
+                  </div>
+                </TiltCard>
               ))}
             </div>
 
-            {/* Academic & Languages Highlights */}
+            {/* Academic & Languages Highlights with 3D Tilt */}
             <div className="about-credentials-grid">
-              <div className="credential-card glass-panel">
-                <div className="cred-icon"><GraduationCap size={20} /></div>
-                <div>
-                  <h4 className="cred-title">B.Com in Information Technology</h4>
-                  <p className="cred-sub">VLB Janakiammal College of Arts and Science • CGPA: 7.4 / 10 (2020 – 2023)</p>
+              <TiltCard maxTilt={8}>
+                <div className="credential-card glass-panel">
+                  <div className="cred-icon"><GraduationCap size={20} /></div>
+                  <div>
+                    <h4 className="cred-title">B.Com in Information Technology</h4>
+                    <p className="cred-sub">VLB Janakiammal College of Arts and Science • CGPA: 7.4 / 10 (2020 – 2023)</p>
+                  </div>
                 </div>
-              </div>
+              </TiltCard>
 
-              <div className="credential-card glass-panel">
-                <div className="cred-icon"><Award size={20} /></div>
-                <div>
-                  <h4 className="cred-title">Full Stack Development (MERN)</h4>
-                  <p className="cred-sub">NSchool Academy Certification (2024)</p>
+              <TiltCard maxTilt={8}>
+                <div className="credential-card glass-panel">
+                  <div className="cred-icon"><Award size={20} /></div>
+                  <div>
+                    <h4 className="cred-title">Full Stack Development (MERN)</h4>
+                    <p className="cred-sub">NSchool Academy Certification (2024)</p>
+                  </div>
                 </div>
-              </div>
+              </TiltCard>
 
-              <div className="credential-card glass-panel">
-                <div className="cred-icon"><Globe2 size={20} /></div>
-                <div>
-                  <h4 className="cred-title">Languages Spoken</h4>
-                  <p className="cred-sub">English (Professional) • Malayalam (Native) • Tamil (Fluent)</p>
+              <TiltCard maxTilt={8}>
+                <div className="credential-card glass-panel">
+                  <div className="cred-icon"><Globe2 size={20} /></div>
+                  <div>
+                    <h4 className="cred-title">Languages Spoken</h4>
+                    <p className="cred-sub">English (Professional) • Malayalam (Native) • Tamil (Fluent)</p>
+                  </div>
                 </div>
-              </div>
+              </TiltCard>
             </div>
           </div>
 

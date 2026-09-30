@@ -131,13 +131,14 @@
   box-shadow: 0 0 20px rgba(236, 72, 153, 0.35);
 }
 
-/* Hero Visual & Avatar Wrapper with Dance Glow */
+/* Hero Visual & 3D Stage Environment */
 .hero-visual {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   z-index: 2;
+  perspective: 1000px;
 }
 
 .avatar-wrapper {
@@ -148,6 +149,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* 3D Stage Floor Podium */
+.stage-podium-3d {
+  position: absolute;
+  bottom: -55px;
+  width: 420px;
+  height: 180px;
+  border-radius: 50%;
+  transform: perspective(600px) rotateX(68deg);
+  background: radial-gradient(ellipse at center, rgba(236, 72, 153, 0.45) 0%, rgba(217, 70, 239, 0.22) 40%, rgba(168, 85, 247, 0.1) 70%, transparent 100%);
+  border: 2px solid rgba(236, 72, 153, 0.45);
+  box-shadow: 0 0 50px rgba(236, 72, 153, 0.55), inset 0 0 35px rgba(217, 70, 239, 0.4);
+  pointer-events: none;
+  z-index: 1;
+  animation: stage-podium-pulse 5s ease-in-out infinite alternate;
+}
+
+.stage-podium-ring {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  border-radius: 50%;
+  border: 1px dashed rgba(251, 191, 36, 0.65);
+  animation: rotate-ring 22s linear infinite reverse;
+}
+
+@keyframes stage-podium-pulse {
+  0% { transform: perspective(600px) rotateX(68deg) scale(0.98); opacity: 0.8; }
+  100% { transform: perspective(600px) rotateX(68deg) scale(1.04); opacity: 1; filter: drop-shadow(0 0 25px rgba(236, 72, 153, 0.6)); }
 }
 
 .avatar-glow {
@@ -190,9 +223,14 @@
   box-shadow: 0 0 35px rgba(0, 0, 0, 0.6);
   position: relative;
   z-index: 2;
+  transition: transform 0.4s ease;
 }
 
-/* Orbiting Tech Floating Badges with Dance Rhythm */
+.avatar-wrapper:hover .avatar-img {
+  transform: scale(1.03);
+}
+
+/* Draggable Floating Tech Badges */
 .floating-tech {
   position: absolute;
   padding: 8px 18px;
@@ -202,36 +240,73 @@
   white-space: nowrap;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
   z-index: 3;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.floating-tech:active {
+  cursor: grabbing;
 }
 
 .tech-react {
-  top: 12%;
-  right: -25px;
-  border-color: rgba(236, 72, 153, 0.4);
-  background: rgba(236, 72, 153, 0.15);
+  top: 10%;
+  right: -30px;
+  border-color: rgba(236, 72, 153, 0.45);
+  background: rgba(236, 72, 153, 0.18);
   backdrop-filter: blur(8px);
   color: #fdf2f8;
-  box-shadow: 0 4px 20px rgba(236, 72, 153, 0.2);
+  box-shadow: 0 4px 20px rgba(236, 72, 153, 0.25);
 }
 
 .tech-ts {
   bottom: 25%;
-  left: -35px;
-  border-color: rgba(168, 85, 247, 0.4);
-  background: rgba(168, 85, 247, 0.15);
+  left: -40px;
+  border-color: rgba(168, 85, 247, 0.45);
+  background: rgba(168, 85, 247, 0.18);
   backdrop-filter: blur(8px);
   color: #fdf2f8;
-  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.25);
 }
 
 .tech-node {
-  bottom: 8%;
-  right: 5px;
-  border-color: rgba(244, 63, 94, 0.4);
-  background: rgba(244, 63, 94, 0.15);
+  bottom: 6%;
+  right: -10px;
+  border-color: rgba(244, 63, 94, 0.45);
+  background: rgba(244, 63, 94, 0.18);
   backdrop-filter: blur(8px);
   color: #fdf2f8;
-  box-shadow: 0 4px 20px rgba(244, 63, 94, 0.2);
+  box-shadow: 0 4px 20px rgba(244, 63, 94, 0.25);
+}
+
+.tech-fyers {
+  top: 40%;
+  right: -45px;
+  border-color: rgba(251, 191, 36, 0.45);
+  background: rgba(251, 191, 36, 0.18);
+  backdrop-filter: blur(8px);
+  color: #fdf2f8;
+  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.25);
+}
+
+.drag-hint-badge {
+  position: absolute;
+  bottom: -32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fbbf24;
+  background: rgba(14, 6, 20, 0.88);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 9999px;
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.25);
+  z-index: 4;
 }
 
 @media (max-width: 992px) {
@@ -264,5 +339,10 @@
   .avatar-wrapper {
     width: 260px;
     height: 260px;
+  }
+
+  .stage-podium-3d {
+    width: 320px;
+    height: 140px;
   }
 }

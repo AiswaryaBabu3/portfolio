@@ -1,0 +1,103 @@
+.stage-lighting-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.spotlight-rig {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sweeping Theatrical Spotlights */
+.spotlight-beam {
+  position: absolute;
+  top: 0;
+  width: 480px;
+  height: 110vh;
+  clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0% 100%);
+  filter: blur(28px);
+  opacity: 0.28;
+  mix-blend-mode: screen;
+  transform-origin: top center;
+}
+
+.beam-left {
+  left: 15%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(236, 72, 153, 0.6) 25%,
+    rgba(217, 70, 239, 0.3) 65%,
+    transparent 100%
+  );
+  animation: sweep-left 12s ease-in-out infinite alternate;
+}
+
+.beam-right {
+  right: 15%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(168, 85, 247, 0.55) 25%,
+    rgba(236, 72, 153, 0.3) 65%,
+    transparent 100%
+  );
+  animation: sweep-right 14s ease-in-out infinite alternate;
+}
+
+.beam-center {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  opacity: 0.16;
+  background: linear-gradient(
+    180deg,
+    rgba(251, 191, 36, 0.7) 0%,
+    rgba(244, 114, 182, 0.4) 30%,
+    transparent 100%
+  );
+  animation: pulse-center 8s ease-in-out infinite alternate;
+}
+
+@keyframes sweep-left {
+  0% { transform: rotate(-25deg); }
+  50% { transform: rotate(-5deg); opacity: 0.36; }
+  100% { transform: rotate(-35deg); opacity: 0.22; }
+}
+
+@keyframes sweep-right {
+  0% { transform: rotate(28deg); }
+  50% { transform: rotate(10deg); opacity: 0.38; }
+  100% { transform: rotate(38deg); opacity: 0.22; }
+}
+
+@keyframes pulse-center {
+  0% { transform: translateX(-50%) scaleX(0.85); opacity: 0.12; }
+  100% { transform: translateX(-50%) scaleX(1.2); opacity: 0.24; }
+}
+
+/* Stage Floor Glow Footlights */
+.stage-floor-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(236, 72, 153, 0.25) 0%,
+    rgba(168, 85, 247, 0.15) 35%,
+    transparent 75%
+  );
+  filter: blur(35px);
+  pointer-events: none;
+}

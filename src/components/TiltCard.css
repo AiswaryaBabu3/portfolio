@@ -1,0 +1,32 @@
+.tilt-card-container {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.4, 1), box-shadow 0.3s ease;
+  will-change: transform;
+  border-radius: 18px;
+}
+
+.tilt-card-content {
+  transform-style: preserve-3d;
+  height: 100%;
+  width: 100%;
+}
+
+/* Children can pop out in 3D Z-space */
+.tilt-card-content > * {
+  transform: translateZ(25px);
+  transform-style: preserve-3d;
+}
+
+.tilt-card-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+  mix-blend-mode: overlay;
+}
