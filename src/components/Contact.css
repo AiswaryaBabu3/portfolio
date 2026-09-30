@@ -9,13 +9,14 @@
   font-size: 28px;
   line-height: 1.3;
   margin-bottom: 16px;
+  font-weight: 700;
 }
 
 .contact-text {
   color: var(--text-secondary);
   font-size: 16px;
   margin-bottom: 32px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .info-cards-list {
@@ -29,13 +30,16 @@
   align-items: center;
   gap: 20px;
   padding: 20px;
-  border-color: rgba(255, 255, 255, 0.03);
+  border-radius: 14px;
+  background: rgba(20, 8, 30, 0.55);
+  border: 1px solid rgba(244, 114, 182, 0.1);
   transition: var(--transition-normal);
 }
 
 .info-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(6, 182, 212, 0.2);
+  transform: translateY(-2px) translateX(4px);
+  border-color: rgba(236, 72, 153, 0.35);
+  box-shadow: 0 8px 25px rgba(236, 72, 153, 0.12);
 }
 
 .info-icon {
@@ -49,21 +53,22 @@
 }
 
 .info-icon.purple {
-  background: rgba(168, 85, 247, 0.1);
-  color: var(--accent-purple);
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  background: rgba(236, 72, 153, 0.12);
+  color: #ec4899;
+  border: 1px solid rgba(236, 72, 153, 0.25);
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.15);
 }
 
 .info-icon.cyan {
-  background: rgba(6, 182, 212, 0.1);
-  color: var(--accent-cyan);
-  border: 1px solid rgba(6, 182, 212, 0.2);
+  background: rgba(244, 114, 182, 0.12);
+  color: #f472b6;
+  border: 1px solid rgba(244, 114, 182, 0.25);
 }
 
 .info-icon.rose {
-  background: rgba(244, 63, 94, 0.1);
+  background: rgba(244, 63, 94, 0.12);
   color: var(--accent-rose);
-  border: 1px solid rgba(244, 63, 94, 0.2);
+  border: 1px solid rgba(244, 63, 94, 0.25);
 }
 
 .info-label {
@@ -82,13 +87,16 @@
 }
 
 a.info-value:hover {
-  color: var(--accent-cyan);
+  color: #f472b6;
 }
 
-/* Contact Form */
+/* Contact Form with Dance Plum Glow */
 .contact-form-wrapper {
   padding: 40px;
-  border-color: rgba(168, 85, 247, 0.1);
+  border-radius: 18px;
+  background: rgba(20, 8, 30, 0.6);
+  border: 1px solid rgba(236, 72, 153, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .contact-form {
@@ -111,10 +119,10 @@ a.info-value:hover {
 }
 
 .form-input {
-  background: rgba(8, 11, 17, 0.5);
-  border: 1px solid var(--border-color);
+  background: rgba(12, 5, 18, 0.65);
+  border: 1px solid rgba(244, 114, 182, 0.18);
   border-radius: 10px;
-  padding: 12px 16px;
+  padding: 13px 18px;
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: 15px;
@@ -123,9 +131,9 @@ a.info-value:hover {
 }
 
 .form-input:focus {
-  border-color: var(--accent-purple);
-  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
-  background: rgba(8, 11, 17, 0.7);
+  border-color: #ec4899;
+  box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.25), 0 0 15px rgba(236, 72, 153, 0.15);
+  background: rgba(16, 6, 24, 0.85);
 }
 
 .form-input.error {
@@ -161,7 +169,7 @@ a.info-value:hover {
 }
 
 .success-icon {
-  color: #22c55e;
+  color: #ec4899;
   animation: scaleUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 

@@ -27,10 +27,10 @@
 }
 
 .filter-btn.active {
-  color: var(--accent-cyan);
-  border-color: var(--accent-cyan);
-  background: rgba(6, 182, 212, 0.08);
-  box-shadow: 0 0 10px rgba(6, 182, 212, 0.1);
+  color: #f472b6;
+  border-color: rgba(236, 72, 153, 0.5);
+  background: rgba(236, 72, 153, 0.14);
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
 }
 
 /* Projects Grid */

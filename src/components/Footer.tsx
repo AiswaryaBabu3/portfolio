@@ -1,4 +1,4 @@
-import { ArrowUp, Mail, Phone } from 'lucide-react';
+import { ArrowUp, Mail, Phone, Eye } from 'lucide-react';
 import './Footer.css';
 
 interface SocialIconProps extends React.SVGProps<SVGSVGElement> {
@@ -20,7 +20,11 @@ const GithubIcon = (props: SocialIconProps) => (
   </svg>
 );
 
-export default function Footer() {
+interface FooterProps {
+  onOpenResume?: () => void;
+}
+
+export default function Footer({ onOpenResume }: FooterProps) {
   const handleScrollTop = () => {
     window.scrollTo({
       top: 0,
@@ -51,9 +55,16 @@ export default function Footer() {
           <button onClick={() => handleScrollTo('projects')} className="footer-link">Projects</button>
           <button onClick={() => handleScrollTo('experience')} className="footer-link">Journey</button>
           <button onClick={() => handleScrollTo('contact')} className="footer-link">Contact</button>
-          <a href="/Resume_Aiswaryababu.pdf" target="_blank" rel="noopener noreferrer" className="footer-link" download="Resume_Aiswarya_Babu.pdf">
-            Resume
-          </a>
+          
+          {onOpenResume ? (
+            <button onClick={onOpenResume} className="footer-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <Eye size={14} /> Resume
+            </button>
+          ) : (
+            <a href="/Resume_Aiswaryababu.pdf" target="_blank" rel="noopener noreferrer" className="footer-link" download="Resume_Aiswarya_Babu.pdf">
+              Resume
+            </a>
+          )}
         </div>
 
         <div className="footer-social-strip">

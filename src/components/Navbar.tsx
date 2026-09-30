@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Home, User, Code, Briefcase, Mail } from 'lucide-react';
+import { Menu, X, Home, User, Code, Briefcase, Mail, Eye } from 'lucide-react';
 import './Navbar.css';
 
 interface NavItem {
@@ -16,7 +16,11 @@ const navItems: NavItem[] = [
   { label: 'Contact', id: 'contact', icon: <Mail size={18} /> },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  onOpenResume?: () => void;
+}
+
+export default function Navbar({ onOpenResume }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
@@ -25,7 +29,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Simple active section detection
+      // Active section detection
       const sections = navItems.map((item) => document.getElementById(item.id));
       const scrollPosition = window.scrollY + 200;
 
@@ -68,15 +72,26 @@ export default function Navbar() {
               {item.label}
             </button>
           ))}
-          <a
-            href="/Resume_Aiswaryababu.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-link resume-nav-btn"
-            download="Resume_Aiswarya_Babu.pdf"
-          >
-            Resume
-          </a>
+          
+          {onOpenResume ? (
+            <button
+              onClick={onOpenResume}
+              className="nav-link resume-nav-btn"
+              title="Preview Resume"
+            >
+              <Eye size={15} style={{ marginRight: '6px' }} /> Resume
+            </button>
+          ) : (
+            <a
+              href="/Resume_Aiswaryababu.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-link resume-nav-btn"
+              download="Resume_Aiswarya_Babu.pdf"
+            >
+              <Eye size={15} style={{ marginRight: '6px' }} /> Resume
+            </a>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -102,16 +117,31 @@ export default function Navbar() {
               <span>{item.label}</span>
             </button>
           ))}
-          <a
-            href="/Resume_Aiswaryababu.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mobile-nav-link resume-nav-btn"
-            download="Resume_Aiswarya_Babu.pdf"
-            onClick={() => setIsOpen(false)}
-          >
-            <span>📄 Download Resume</span>
-          </a>
+
+          {onOpenResume ? (
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                onOpenResume();
+              }}
+              className="mobile-nav-link resume-nav-btn"
+            >
+              <Eye size={18} />
+              <span>Preview Resume</span>
+            </button>
+          ) : (
+            <a
+              href="/Resume_Aiswaryababu.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mobile-nav-link resume-nav-btn"
+              download="Resume_Aiswarya_Babu.pdf"
+              onClick={() => setIsOpen(false)}
+            >
+              <Eye size={18} />
+              <span>Preview Resume</span>
+            </a>
+          )}
         </div>
       </div>
     </nav>

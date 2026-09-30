@@ -1,5 +1,5 @@
 import { motion, type Variants } from 'framer-motion';
-import { ArrowRight, Mail, Download } from 'lucide-react';
+import { ArrowRight, Mail, Download, Eye } from 'lucide-react';
 import avatarImg from '../assets/profile.jpg';
 import './Hero.css';
 
@@ -28,7 +28,11 @@ const PhoneIcon = (props: SocialIconProps) => (
   </svg>
 );
 
-export default function Hero() {
+interface HeroProps {
+  onOpenResume?: () => void;
+}
+
+export default function Hero({ onOpenResume }: HeroProps) {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -115,15 +119,28 @@ export default function Hero() {
             <button onClick={() => handleScrollTo('projects')} className="btn btn-primary">
               Explore Projects <ArrowRight size={18} />
             </button>
+            
+            {onOpenResume && (
+              <button
+                onClick={onOpenResume}
+                className="btn btn-secondary resume-preview-btn"
+                title="Preview Resume in Modal"
+              >
+                <Eye size={17} /> Preview Resume
+              </button>
+            )}
+
             <a
               href="/Resume_Aiswaryababu.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary"
               download="Resume_Aiswarya_Babu.pdf"
+              title="Download Resume PDF"
             >
-              Resume <Download size={17} />
+              <Download size={16} /> Download CV
             </a>
+
             <button onClick={() => handleScrollTo('contact')} className="btn btn-secondary">
               Contact Me
             </button>
