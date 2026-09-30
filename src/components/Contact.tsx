@@ -21,6 +21,13 @@ const LinkedinIcon = (props: SocialIconProps) => (
   </svg>
 );
 
+const GithubIcon = (props: SocialIconProps) => (
+  <svg viewBox="0 0 24 24" width={props.size || 24} height={props.size || 24} stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+);
+
 export default function Contact() {
   const [form, setForm] = useState<FormState>({
     name: '',
@@ -97,7 +104,7 @@ export default function Contact() {
                   <Mail size={20} />
                 </div>
                 <div>
-                  <span className="info-label">Email Me</span>
+                  <span className="info-label">Email</span>
                   <a href="mailto:aiswaryababu544@gmail.com" className="info-value">aiswaryababu544@gmail.com</a>
                 </div>
               </div>
@@ -107,8 +114,8 @@ export default function Contact() {
                   <Phone size={20} />
                 </div>
                 <div>
-                  <span className="info-label">Call / WhatsApp</span>
-                  <a href="tel:6369632313" className="info-value">+91 6369632313</a>
+                  <span className="info-label">Phone</span>
+                  <a href="tel:+916369632313" className="info-value">+91 6369632313</a>
                 </div>
               </div>
 
@@ -118,7 +125,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <span className="info-label">Location</span>
-                  <span className="info-value">Coimbatore, Tamilnadu</span>
+                  <span className="info-value">Coimbatore, Tamil Nadu</span>
                 </div>
               </div>
 
@@ -129,6 +136,16 @@ export default function Contact() {
                 <div>
                   <span className="info-label">LinkedIn</span>
                   <a href="https://linkedin.com/in/aiswarya-babu-ab49b0278" target="_blank" rel="noopener noreferrer" className="info-value">aiswarya-babu-ab49b0278</a>
+                </div>
+              </div>
+
+              <div className="info-card glass-panel">
+                <div className="info-icon" style={{ background: 'rgba(255, 255, 255, 0.05)', color: 'var(--text-primary)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                  <GithubIcon size={20} />
+                </div>
+                <div>
+                  <span className="info-label">GitHub</span>
+                  <a href="https://github.com/Aiswaryababu3" target="_blank" rel="noopener noreferrer" className="info-value">github.com/Aiswaryababu3</a>
                 </div>
               </div>
             </div>

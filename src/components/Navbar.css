@@ -87,6 +87,20 @@
   border-radius: 9999px;
 }
 
+.resume-nav-btn {
+  background: rgba(6, 182, 212, 0.1) !important;
+  color: var(--accent-cyan) !important;
+  border: 1px solid rgba(6, 182, 212, 0.3) !important;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.resume-nav-btn:hover {
+  background: var(--accent-cyan) !important;
+  color: var(--bg-primary) !important;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+}
+
 .navbar-toggle {
   display: none;
   background: transparent;

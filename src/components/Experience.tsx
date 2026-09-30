@@ -1,13 +1,14 @@
 import { motion, type Variants } from 'framer-motion';
-import { Briefcase, GraduationCap } from 'lucide-react';
+import { Briefcase, GraduationCap, Award, MapPin } from 'lucide-react';
 import './Experience.css';
 
 interface TimelineItem {
   id: number;
-  type: 'work' | 'education';
+  type: 'work' | 'education' | 'certification';
   period: string;
   title: string;
   organization: string;
+  location?: string;
   description: string[];
 }
 
@@ -16,49 +17,43 @@ export default function Experience() {
     {
       id: 1,
       type: 'work',
-      period: 'Sep 2025 - Present',
-      title: 'Senior Software Developer',
+      period: 'February 2024 – Present',
+      title: 'Software Developer / Senior Software Developer',
       organization: 'Aagnia Technologies',
+      location: 'Coimbatore, Tamil Nadu',
       description: [
-        'Promoted to lead backend system architectures, API designs, and database scaling.',
-        'Engineered Everest Tutoring (AI-powered portal with OpenAI & Stripe integrations) and Invetaa (algorithmic trading with Fyers API, MongoDB, & Redis).',
-        'Built custom background client service applications for automated printer systems integration.',
-        'Designed microservices structures utilizing Python, FastAPI, PostgreSQL, MongoDB, and Redis to achieve high-availability and low latency.',
+        'Full-stack and backend developer across Everest Tutoring (AI-powered EdTech) and Invetaa (algorithmic trading microservices), covering backend architecture, APIs, real-time services, frontend workflows, and third-party integrations.',
+        'Engineered an automated rubric-based writing evaluation system using GPT-4o with structured JSON output, fallback handling, and centralized LLM token/cost accounting.',
+        'Designed a distributed 4-microservice trading platform (Algo Engine, OMS, Backtesting Service, Webhook Consumer) with Redis Pub/Sub, Fyers streaming WebSockets, and vectorized backtesting with Pandas & NumPy.',
+        'Created "Elliot", a syllabus-aware academic chatbot with dynamic context injection from student performance, weak topics, schedules, and learning activities.',
+        'Implemented subdomain-based multi-tenant isolation and role-based access control (RBAC), enabling multiple institutions within a single shared deployment.',
+        'Integrated Stripe subscription tiers and webhooks, VdoCipher secure video delivery, Google Drive API, Twilio/Resend messaging, and booklet print request background daemons.',
+        'Built a Next.js 16 App Router booking platform using SSR/SSG patterns, integrated with Xero Node SDK and Stripe for automated invoicing and bookkeeping.',
+        'Applied GitLab CI/CD, Docker, SonarQube, and security scanning practices across all production development workflows.',
       ],
     },
     {
       id: 2,
-      type: 'work',
-      period: 'Feb 2024 - Sep 2025',
-      title: 'Software Developer',
-      organization: 'Aagnia Technologies',
+      type: 'certification',
+      period: '2024',
+      title: 'Full Stack Development (MERN Stack)',
+      organization: 'NSchool Academy',
+      location: 'Coimbatore, Tamil Nadu',
       description: [
-        'Joined as full-stack software developer focusing on core FastAPI/Python backends and React/TypeScript frontends.',
-        'Implemented subdomain-based tenant isolation supporting multi-institution configurations within a single database deployment.',
-        'Integrated Stripe payments with role-based access control and plan-based feature restrictions.',
-        'Established responsive web design structures and dynamic forms validation via React & ViteJS.',
+        'Completed comprehensive hands-on engineering training covering MongoDB, Express.js, React.js, and Node.js.',
+        'Built full-stack web applications with modern state management, component architecture, responsive design, and REST APIs.',
       ],
     },
     {
       id: 3,
       type: 'education',
-      period: '2023 - 2024',
-      title: 'Full Stack Web Development (MERN)',
-      organization: 'MERN Stack Course Certification',
+      period: '2020 – 2023',
+      title: 'Bachelor of Commerce in Information Technology (B.Com IT)',
+      organization: 'VLB Janakiammal College of Arts and Science',
+      location: 'Coimbatore, Tamil Nadu • CGPA: 7.4 / 10',
       description: [
-        'Mastered MongoDB, Express.js, React.js, and Node.js to build full-stack web applications.',
-        'Learned modern state management, responsive designs, database architectures, and Git version control.',
-      ],
-    },
-    {
-      id: 4,
-      type: 'education',
-      period: '2020 - 2023',
-      title: 'BCom IT (Bachelor of Commerce in Information Technology)',
-      organization: 'University Education',
-      description: [
-        'Acquired academic foundations in database management, business application development, and IT software networks.',
-        'Constructed initial web application layouts and learned programming foundations.',
+        'Studied core computational foundations, relational database management systems, data structures, and enterprise information technology.',
+        'Developed foundational programming, logic building, and analytical skills.',
       ],
     },
   ];
@@ -69,20 +64,33 @@ export default function Experience() {
       opacity: 1,
       y: 0,
       transition: {
-        delay: custom * 0.2,
+        delay: custom * 0.15,
         duration: 0.5,
         type: 'spring' as const,
-        stiffness: 80,
+        stiffness: 85,
       },
     }),
+  };
+
+  const getBadgeIcon = (type: 'work' | 'education' | 'certification') => {
+    switch (type) {
+      case 'work':
+        return <Briefcase size={16} />;
+      case 'certification':
+        return <Award size={16} />;
+      case 'education':
+        return <GraduationCap size={16} />;
+    }
   };
 
   return (
     <section id="experience" className="experience-section section">
       <div className="container">
         <div className="section-header text-center">
-          <h2 className="section-title text-gradient">My Journey</h2>
-          <p className="section-subtitle">Professional software development experience and accomplishments</p>
+          <h2 className="section-title text-gradient">Work & Education Journey</h2>
+          <p className="section-subtitle">
+            Professional software engineering tenure, notable achievements, and academic background
+          </p>
         </div>
 
         <div className="timeline-container">
@@ -92,8 +100,8 @@ export default function Experience() {
             <div key={item.id} className="timeline-item">
               {/* Timeline Icon Indicator */}
               <div className="timeline-badge-wrapper">
-                <div className={`timeline-badge ${item.type === 'work' ? 'work' : 'education'}`}>
-                  {item.type === 'work' ? <Briefcase size={16} /> : <GraduationCap size={16} />}
+                <div className={`timeline-badge ${item.type}`}>
+                  {getBadgeIcon(item.type)}
                 </div>
               </div>
 
@@ -103,13 +111,20 @@ export default function Experience() {
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: '-100px' }}
+                viewport={{ once: true, margin: '-60px' }}
                 custom={index}
               >
                 <div className="timeline-card-header">
                   <span className="timeline-period">{item.period}</span>
                   <h3 className="timeline-role">{item.title}</h3>
-                  <h4 className="timeline-org">{item.organization}</h4>
+                  <div className="timeline-org-row">
+                    <h4 className="timeline-org">{item.organization}</h4>
+                    {item.location && (
+                      <span className="timeline-location">
+                        <MapPin size={13} /> {item.location}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 
                 <ul className="timeline-desc-list">

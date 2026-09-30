@@ -58,6 +58,11 @@
   box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
 }
 
+.timeline-badge.certification {
+  background: #10b981;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
 /* Timeline Cards */
 .timeline-card {
   padding: 28px;
@@ -89,13 +94,29 @@
 .timeline-role {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.timeline-org-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
 }
 
 .timeline-org {
   font-size: 15px;
-  color: var(--text-secondary);
-  font-weight: 500;
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.timeline-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
 .timeline-desc-list {

@@ -68,6 +68,15 @@ export default function Navbar() {
               {item.label}
             </button>
           ))}
+          <a
+            href="/Resume_Aiswaryababu.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link resume-nav-btn"
+            download="Resume_Aiswarya_Babu.pdf"
+          >
+            Resume
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -93,6 +102,16 @@ export default function Navbar() {
               <span>{item.label}</span>
             </button>
           ))}
+          <a
+            href="/Resume_Aiswaryababu.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-nav-link resume-nav-btn"
+            download="Resume_Aiswarya_Babu.pdf"
+            onClick={() => setIsOpen(false)}
+          >
+            <span>📄 Download Resume</span>
+          </a>
         </div>
       </div>
     </nav>
