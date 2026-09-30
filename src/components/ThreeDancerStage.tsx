@@ -2,12 +2,22 @@ import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { Play, Pause, RotateCw, Move3d } from 'lucide-react';
+import {
+  Play,
+  Pause,
+  RotateCw,
+  Move3d,
+  Sparkles,
+  Camera,
+  SunMedium
+} from 'lucide-react';
 import './ThreeDancerStage.css';
 
 interface ThreeDancerStageProps {
   onStageClick?: () => void;
 }
+
+type LightTheme = 'diva' | 'gold' | 'cyber';
 
 export default function ThreeDancerStage({ onStageClick }: ThreeDancerStageProps) {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -15,11 +25,15 @@ export default function ThreeDancerStage({ onStageClick }: ThreeDancerStageProps
   const [isPlaying, setIsPlaying] = useState(true);
   const [danceSpeed, setDanceSpeed] = useState<number>(1.0);
   const [isAutoRotate, setIsAutoRotate] = useState(true);
+  const [lightTheme, setLightTheme] = useState<LightTheme>('diva');
 
-  // References for animation manipulation outside effect
+  // References for animation & scene manipulation outside effect
   const mixerRef = useRef<THREE.AnimationMixer | null>(null);
   const actionRef = useRef<THREE.AnimationAction | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
+  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const spotLightLeftRef = useRef<THREE.SpotLight | null>(null);
+  const spotLightRightRef = useRef<THREE.SpotLight | null>(null);
 
   useEffect(() => {
     const container = mountRef.current;
@@ -35,6 +49,7 @@ export default function ThreeDancerStage({ onStageClick }: ThreeDancerStageProps
       100
     );
     camera.position.set(0, 1.35, 3.6);
+    cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
@@ -61,25 +76,27 @@ export default function ThreeDancerStage({ onStageClick }: ThreeDancerStageProps
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
     scene.add(ambientLight);
 
-    // Overhead Magenta Spotlight
-    const spotLightMagenta = new THREE.SpotLight(0xec4899, 4.5);
-    spotLightMagenta.position.set(-2.5, 4.5, 2.5);
-    spotLightMagenta.angle = Math.PI / 5;
-    spotLightMagenta.penumbra = 0.8;
-    spotLightMagenta.castShadow = true;
-    spotLightMagenta.target.position.set(0, 0.8, 0);
-    scene.add(spotLightMagenta);
-    scene.add(spotLightMagenta.target);
+    // Overhead Left Spotlight (Magenta by default)
+    const spotLightLeft = new THREE.SpotLight(0xec4899, 4.5);
+    spotLightLeft.position.set(-2.5, 4.5, 2.5);
+    spotLightLeft.angle = Math.PI / 5;
+    spotLightLeft.penumbra = 0.8;
+    spotLightLeft.castShadow = true;
+    spotLightLeft.target.position.set(0, 0.8, 0);
+    scene.add(spotLightLeft);
+    scene.add(spotLightLeft.target);
+    spotLightLeftRef.current = spotLightLeft;
 
-    // Overhead Golden Theatrical Spotlight
-    const spotLightGold = new THREE.SpotLight(0xfbbf24, 4.0);
-    spotLightGold.position.set(2.5, 4.5, 2.5);
-    spotLightGold.angle = Math.PI / 5;
-    spotLightGold.penumbra = 0.8;
-    spotLightGold.castShadow = true;
-    spotLightGold.target.position.set(0, 0.8, 0);
-    scene.add(spotLightGold);
-    scene.add(spotLightGold.target);
+    // Overhead Right Spotlight (Gold by default)
+    const spotLightRight = new THREE.SpotLight(0xfbbf24, 4.0);
+    spotLightRight.position.set(2.5, 4.5, 2.5);
+    spotLightRight.angle = Math.PI / 5;
+    spotLightRight.penumbra = 0.8;
+    spotLightRight.castShadow = true;
+    spotLightRight.target.position.set(0, 0.8, 0);
+    scene.add(spotLightRight);
+    scene.add(spotLightRight.target);
+    spotLightRightRef.current = spotLightRight;
 
     // Rim/Back Spotlight for halo silhouette
     const backRimLight = new THREE.DirectionalLight(0xd946ef, 2.2);
@@ -247,6 +264,35 @@ export default function ThreeDancerStage({ onStageClick }: ThreeDancerStageProps
     }
   };
 
+  // Reset Camera View to Front
+  const handleResetCamera = () => {
+    if (cameraRef.current && controlsRef.current) {
+      cameraRef.current.position.set(0, 1.35, 3.6);
+      controlsRef.current.target.set(0, 0.95, 0);
+      controlsRef.current.update();
+    }
+  };
+
+  // Cycle Stage Spotlight Mood
+  const handleCycleLighting = () => {
+    const nextTheme: LightTheme =
+      lightTheme === 'diva' ? 'gold' : lightTheme === 'gold' ? 'cyber' : 'diva';
+    setLightTheme(nextTheme);
+
+    if (spotLightLeftRef.current && spotLightRightRef.current) {
+      if (nextTheme === 'gold') {
+        spotLightLeftRef.current.color.setHex(0xf59e0b);
+        spotLightRightRef.current.color.setHex(0xfbbf24);
+      } else if (nextTheme === 'cyber') {
+        spotLightLeftRef.current.color.setHex(0x38bdf8);
+        spotLightRightRef.current.color.setHex(0xa855f7);
+      } else {
+        spotLightLeftRef.current.color.setHex(0xec4899);
+        spotLightRightRef.current.color.setHex(0xfbbf24);
+      }
+    }
+  };
+
   return (
     <div className="three-dancer-stage-container" onClick={onStageClick}>
       {/* 3D WebGL Canvas Container */}
@@ -260,59 +306,107 @@ export default function ThreeDancerStage({ onStageClick }: ThreeDancerStageProps
         </div>
       )}
 
-      {/* 3D Stage Footlight Controls Bar */}
+      {/* ===================================================
+          LEFT-SIDE THEATRICAL STAGE DOCK (REACT / MAC DOCK)
+          =================================================== */}
       {!isLoading && (
-        <div className="dancer-stage-controls-bar" onClick={(e) => e.stopPropagation()}>
-          <div className="drag-camera-hint">
-            <Move3d size={15} /> <span>Drag to Orbit in 3D</span>
+        <div
+          className="theatrical-stage-dock"
+          onClick={(e) => e.stopPropagation()}
+          title="Theatrical Stage Director Dock"
+        >
+          {/* Dock Header Icon */}
+          <div className="dock-header-icon" title="Stage Director">
+            <Sparkles size={16} />
           </div>
 
-          <div className="controls-divider" />
+          <div className="dock-divider-horizontal" />
 
-          {/* Play / Pause Toggle */}
+          {/* 1. Play / Pause Button */}
           <button
-            className="control-pill-btn"
+            className={`dock-item-btn ${isPlaying ? 'active' : ''}`}
             onClick={handleTogglePlay}
-            title={isPlaying ? 'Pause Dance' : 'Play Dance'}
+            aria-label={isPlaying ? 'Pause Dance' : 'Play Dance'}
           >
-            {isPlaying ? <Pause size={13} /> : <Play size={13} />}
-            <span>{isPlaying ? 'Pause' : 'Dance'}</span>
+            {isPlaying ? <Pause size={17} /> : <Play size={17} />}
+            <span className="dock-tooltip">
+              {isPlaying ? 'Pause Dance' : 'Play Dance'}
+            </span>
           </button>
 
-          {/* Dance Tempo Speeds */}
+          <div className="dock-divider-horizontal" />
+
+          {/* 2. Dance Tempo Speeds (0.75x, 1.0x, 1.25x) */}
           <button
-            className={`control-pill-btn ${danceSpeed === 0.75 ? 'active' : ''}`}
+            className={`dock-item-btn ${danceSpeed === 0.75 ? 'active' : ''}`}
             onClick={() => handleSetSpeed(0.75)}
-            title="Graceful Classical Tempo"
+            aria-label="0.75x Graceful Tempo"
           >
-            0.75x
+            <span className="dock-speed-text">0.75x</span>
+            <span className="dock-tooltip">Graceful Tempo (0.75x)</span>
           </button>
+
           <button
-            className={`control-pill-btn ${danceSpeed === 1.0 ? 'active' : ''}`}
+            className={`dock-item-btn ${danceSpeed === 1.0 ? 'active' : ''}`}
             onClick={() => handleSetSpeed(1.0)}
-            title="Standard Allegro Tempo"
+            aria-label="1.0x Allegro Tempo"
           >
-            1.0x
+            <span className="dock-speed-text">1.0x</span>
+            <span className="dock-tooltip">Allegro Tempo (1.0x)</span>
           </button>
+
           <button
-            className={`control-pill-btn ${danceSpeed === 1.25 ? 'active' : ''}`}
+            className={`dock-item-btn ${danceSpeed === 1.25 ? 'active' : ''}`}
             onClick={() => handleSetSpeed(1.25)}
-            title="Fast Rhythmic Tempo"
+            aria-label="1.25x Rhythmic Tempo"
           >
-            1.25x
+            <span className="dock-speed-text">1.25x</span>
+            <span className="dock-tooltip">Rhythmic Tempo (1.25x)</span>
           </button>
 
-          <div className="controls-divider" />
+          <div className="dock-divider-horizontal" />
 
-          {/* Auto Rotate Camera Toggle */}
+          {/* 3. 360° Auto-Orbit Camera */}
           <button
-            className={`control-pill-btn ${isAutoRotate ? 'active' : ''}`}
+            className={`dock-item-btn ${isAutoRotate ? 'active' : ''}`}
             onClick={handleToggleAutoRotate}
-            title="Toggle 360° Camera Auto-Orbit"
+            aria-label="360° Auto Orbit"
           >
-            <RotateCw size={13} />
-            <span>{isAutoRotate ? 'Orbit On' : 'Orbit Off'}</span>
+            <RotateCw size={17} />
+            <span className="dock-tooltip">
+              {isAutoRotate ? 'Pause 360° Orbit' : 'Resume 360° Orbit'}
+            </span>
           </button>
+
+          {/* 4. Reset Camera Angle */}
+          <button
+            className="dock-item-btn"
+            onClick={handleResetCamera}
+            aria-label="Reset Camera View"
+          >
+            <Camera size={17} />
+            <span className="dock-tooltip">Reset Front View</span>
+          </button>
+
+          {/* 5. Stage Spotlights Mood */}
+          <button
+            className="dock-item-btn"
+            onClick={handleCycleLighting}
+            aria-label="Change Stage Spotlights"
+          >
+            <SunMedium size={17} />
+            <span className="dock-tooltip">
+              Mood: {lightTheme === 'diva' ? 'Diva Rose' : lightTheme === 'gold' ? 'Temple Gold' : 'Cyber Violet'}
+            </span>
+          </button>
+        </div>
+      )}
+
+      {/* Drag Helper Pill (Clean subtle hint at bottom left) */}
+      {!isLoading && (
+        <div className="dock-drag-hint-pill" onClick={(e) => e.stopPropagation()}>
+          <Move3d size={13} />
+          <span>Click & Drag to Orbit 3D</span>
         </div>
       )}
     </div>
