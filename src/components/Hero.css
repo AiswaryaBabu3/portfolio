@@ -49,6 +49,14 @@
   backdrop-filter: blur(8px);
 }
 
+.badge-profile-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #ec4899;
+}
+
 .stage-badge-pulse {
   width: 8px;
   height: 8px;

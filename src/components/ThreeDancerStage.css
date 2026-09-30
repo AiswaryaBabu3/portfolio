@@ -1,0 +1,153 @@
+/* ===================================================
+   3D DANCER STAGE (THREE.JS INTERACTIVE 3D DANCE)
+   =================================================== */
+
+.three-dancer-stage-container {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  height: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.three-dancer-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  cursor: grab;
+  outline: none;
+  touch-action: none;
+}
+
+.three-dancer-canvas:active {
+  cursor: grabbing;
+}
+
+/* Loading Overlay */
+.dancer-loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(12, 4, 18, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  z-index: 20;
+}
+
+.dancer-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(244, 114, 182, 0.2);
+  border-top-color: #ec4899;
+  border-right-color: #fbbf24;
+  border-radius: 50%;
+  animation: spinSpinner 0.9s linear infinite;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+}
+
+@keyframes spinSpinner {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.dancer-loading-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f472b6;
+  text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+}
+
+/* 3D Stage Footlight Controls Bar */
+.dancer-stage-controls-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 6, 22, 0.85);
+  border: 1px solid rgba(244, 114, 182, 0.35);
+  padding: 6px 14px;
+  border-radius: 30px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(236, 72, 153, 0.25);
+  z-index: 25;
+}
+
+.control-pill-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fdf2f8;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.control-pill-btn:hover {
+  background: rgba(236, 72, 153, 0.25);
+  border-color: #ec4899;
+  color: #fff;
+}
+
+.control-pill-btn.active {
+  background: linear-gradient(135deg, #ec4899, #d946ef);
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.6);
+}
+
+.controls-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(244, 114, 182, 0.25);
+}
+
+.drag-camera-hint {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fbbf24;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Fallback if WebGL/Model fails */
+.dancer-fallback-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .three-dancer-stage-container {
+    height: 380px;
+  }
+  .dancer-stage-controls-bar {
+    gap: 8px;
+    padding: 5px 10px;
+  }
+  .drag-camera-hint span {
+    display: none;
+  }
+}

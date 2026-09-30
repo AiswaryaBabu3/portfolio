@@ -10,6 +10,7 @@ import {
   Move
 } from 'lucide-react';
 import avatarImg from '../assets/profile.jpg';
+import ThreeDancerStage from './ThreeDancerStage';
 import './Hero.css';
 
 interface SocialIconProps extends React.SVGProps<SVGSVGElement> {
@@ -113,6 +114,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
           animate="visible"
         >
           <motion.div className="stage-performer-badge" variants={itemVariants}>
+            <img src={avatarImg} alt="Aiswarya Babu" className="badge-profile-thumb" />
             <span className="stage-badge-pulse"></span>
             <Sparkles size={14} style={{ color: '#fbbf24' }} />
             Choreographing Scalable Architecture • Senior Software Developer & Classical Dancer
@@ -144,23 +146,8 @@ export default function Hero({ onOpenResume }: HeroProps) {
             <div className="stage-podium-concentric-2"></div>
           </div>
 
-          {/* CENTER DANCER PERFORMER */}
-          <div
-            className="stage-center-performer"
-            onClick={() => handleScrollTo('about')}
-            title="Click to explore About Aiswarya"
-          >
-            <div className="performer-avatar-frame-large">
-              <img
-                src={avatarImg}
-                alt="Aiswarya Babu - Classical Dancer & Software Engineer"
-                className="performer-avatar-img"
-              />
-            </div>
-            <div className="stage-performer-caption">
-              Aiswarya Babu <Sparkles size={14} color="#ec4899" />
-            </div>
-          </div>
+          {/* 3D LIVE DANCING PERSON (THREE.JS) */}
+          <ThreeDancerStage onStageClick={() => handleScrollTo('about')} />
 
           {/* ===================================================
               CLICKABLE STAGE PERFORMANCE PORTALS
