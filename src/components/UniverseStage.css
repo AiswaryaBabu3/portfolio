@@ -1,0 +1,822 @@
+/* ===================================================
+   UNIVERSE FOR DANCE - 3D THEATRICAL REALM STYLES
+   =================================================== */
+
+.universe-viewport {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #050209;
+  user-select: none;
+  font-family: inherit;
+  perspective: 1200px;
+}
+
+/* Three.js canvas layer is at z-index 0 */
+
+/* Background Cosmic Ambience & Dance Silhouette */
+.universe-bg-dancer {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/dance-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  mix-blend-mode: screen;
+  filter: saturate(1.4) blur(1px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Stage Lighting Spotlights */
+.universe-spotlight-left,
+.universe-spotlight-right {
+  position: absolute;
+  top: -100px;
+  width: 50vw;
+  height: 120vh;
+  pointer-events: none;
+  z-index: 2;
+  transform-origin: top center;
+  mix-blend-mode: screen;
+  transition: opacity 0.5s ease;
+}
+
+.universe-spotlight-left {
+  left: -10vw;
+  background: conic-gradient(
+    from 140deg at 20% 0%,
+    transparent 0deg,
+    rgba(236, 72, 153, 0.22) 15deg,
+    rgba(217, 70, 239, 0.28) 25deg,
+    rgba(244, 114, 182, 0.15) 35deg,
+    transparent 45deg
+  );
+  animation: sweepSpotlightLeft 12s ease-in-out infinite alternate;
+}
+
+.universe-spotlight-right {
+  right: -10vw;
+  background: conic-gradient(
+    from 215deg at 80% 0%,
+    transparent 0deg,
+    rgba(217, 70, 239, 0.22) 15deg,
+    rgba(236, 72, 153, 0.26) 25deg,
+    rgba(251, 191, 36, 0.15) 35deg,
+    transparent 45deg
+  );
+  animation: sweepSpotlightRight 14s ease-in-out infinite alternate;
+}
+
+/* Gold Theme Spotlights */
+.theme-gold .universe-spotlight-left {
+  background: conic-gradient(from 140deg at 20% 0%, transparent 0deg, rgba(245, 158, 11, 0.25) 20deg, transparent 45deg);
+}
+.theme-gold .universe-spotlight-right {
+  background: conic-gradient(from 215deg at 80% 0%, transparent 0deg, rgba(251, 191, 36, 0.25) 20deg, transparent 45deg);
+}
+
+/* Cyber Theme Spotlights */
+.theme-cyber .universe-spotlight-left {
+  background: conic-gradient(from 140deg at 20% 0%, transparent 0deg, rgba(56, 189, 248, 0.25) 20deg, transparent 45deg);
+}
+.theme-cyber .universe-spotlight-right {
+  background: conic-gradient(from 215deg at 80% 0%, transparent 0deg, rgba(168, 85, 247, 0.25) 20deg, transparent 45deg);
+}
+
+/* Space Theme Spotlights */
+.theme-space .universe-spotlight-left {
+  background: conic-gradient(from 140deg at 20% 0%, transparent 0deg, rgba(99, 102, 241, 0.25) 20deg, transparent 45deg);
+}
+.theme-space .universe-spotlight-right {
+  background: conic-gradient(from 215deg at 80% 0%, transparent 0deg, rgba(165, 180, 252, 0.25) 20deg, transparent 45deg);
+}
+
+@keyframes sweepSpotlightLeft {
+  0% { transform: rotate(-8deg) scaleX(0.9); opacity: 0.7; }
+  50% { transform: rotate(4deg) scaleX(1.1); opacity: 0.95; }
+  100% { transform: rotate(-3deg) scaleX(1); opacity: 0.8; }
+}
+
+@keyframes sweepSpotlightRight {
+  0% { transform: rotate(8deg) scaleX(0.9); opacity: 0.75; }
+  50% { transform: rotate(-4deg) scaleX(1.15); opacity: 0.95; }
+  100% { transform: rotate(3deg) scaleX(1); opacity: 0.8; }
+}
+
+/* TOP UNIVERSE HUD BAR */
+.universe-hud-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: linear-gradient(180deg, rgba(8, 3, 12, 0.85) 0%, rgba(8, 3, 12, 0) 100%);
+  backdrop-filter: blur(8px);
+  z-index: 50;
+  border-bottom: 1px solid rgba(236, 72, 153, 0.15);
+}
+
+.universe-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-icon-pulse {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ec4899, #d946ef);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+  animation: pulseBrand 3s infinite alternate;
+}
+
+@keyframes pulseBrand {
+  0% { transform: scale(0.95); box-shadow: 0 0 15px rgba(236, 72, 153, 0.4); }
+  100% { transform: scale(1.05); box-shadow: 0 0 28px rgba(217, 70, 239, 0.8); }
+}
+
+.brand-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  background: linear-gradient(135deg, #fff 0%, #f472b6 60%, #e879f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: rgba(244, 114, 182, 0.8);
+  text-transform: uppercase;
+}
+
+/* Quick Navigation Links in HUD */
+.universe-quick-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hud-nav-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(244, 114, 182, 0.2);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0.45rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.25s ease;
+}
+
+.hud-nav-btn:hover {
+  background: rgba(236, 72, 153, 0.2);
+  border-color: #ec4899;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+}
+
+.hud-nav-btn.active {
+  background: linear-gradient(135deg, #ec4899, #d946ef);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+}
+
+/* HUD Controls Right Side */
+.universe-hud-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hud-theme-picker {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(244, 114, 182, 0.2);
+  padding: 0.25rem 0.4rem;
+  border-radius: 30px;
+  gap: 0.35rem;
+}
+
+.theme-dot-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-dot-btn.active {
+  border-color: #fff;
+  transform: scale(1.25);
+  box-shadow: 0 0 12px currentColor;
+}
+
+.theme-dot-diva { background: linear-gradient(135deg, #ec4899, #d946ef); color: #ec4899; }
+.theme-dot-gold { background: linear-gradient(135deg, #fbbf24, #d97706); color: #fbbf24; }
+.theme-dot-cyber { background: linear-gradient(135deg, #38bdf8, #818cf8); color: #38bdf8; }
+.theme-dot-space { background: linear-gradient(135deg, #a5b4fc, #6366f1); color: #a5b4fc; }
+
+.hud-switch-view-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 24px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+.hud-switch-view-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #fff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+}
+
+/* 3D INTERACTIVE STAGE SPACE */
+.universe-stage-canvas-space {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  cursor: grab;
+  z-index: 10;
+}
+
+.universe-stage-canvas-space:active {
+  cursor: grabbing;
+}
+
+/* 3D Rotatable Chamber */
+.stage-3d-rotator {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform 0.15s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+/* THE 3D CENTER STAGE PODIUM */
+.universe-center-podium {
+  position: absolute;
+  width: 580px;
+  height: 580px;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+/* 3D Concentric Stage Floor Plates */
+.stage-floor-rings-3d {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform: rotateX(72deg) translateZ(-60px);
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.stage-ring-disc {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px dashed rgba(236, 72, 153, 0.35);
+  box-shadow: 0 0 35px rgba(236, 72, 153, 0.25);
+}
+
+.stage-ring-1 { width: 560px; height: 560px; border-style: solid; border-width: 1px; border-color: rgba(244, 114, 182, 0.25); animation: spinRingClockwise 45s linear infinite; }
+.stage-ring-2 { width: 440px; height: 440px; border-color: rgba(217, 70, 239, 0.4); animation: spinRingCounter 32s linear infinite; }
+.stage-ring-3 { width: 320px; height: 320px; border: 2px solid rgba(236, 72, 153, 0.6); box-shadow: 0 0 50px rgba(236, 72, 153, 0.5), inset 0 0 40px rgba(217, 70, 239, 0.3); }
+.stage-center-plate {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.75) 0%, rgba(217, 70, 239, 0.4) 45%, rgba(8, 3, 12, 0.9) 100%);
+  box-shadow: 0 0 60px rgba(236, 72, 153, 0.8), 0 0 100px rgba(217, 70, 239, 0.5);
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  animation: pulsePodiumCenter 4s ease-in-out infinite alternate;
+}
+
+@keyframes spinRingClockwise {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spinRingCounter {
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+@keyframes pulsePodiumCenter {
+  0% { transform: translate(-50%, -50%) scale(0.96); box-shadow: 0 0 40px rgba(236, 72, 153, 0.6); }
+  100% { transform: translate(-50%, -50%) scale(1.04); box-shadow: 0 0 80px rgba(217, 70, 239, 0.95); }
+}
+
+/* Center Avatar Cylinder & Hologram */
+.stage-performer-hologram {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  transform: translateZ(40px);
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.performer-avatar-frame {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  padding: 6px;
+  background: linear-gradient(135deg, #ec4899, #fbbf24, #d946ef, #38bdf8);
+  background-size: 300% 300%;
+  animation: hologramGradient 6s ease infinite;
+  box-shadow: 0 15px 50px rgba(236, 72, 153, 0.5), 0 0 80px rgba(217, 70, 239, 0.35);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.performer-avatar-frame:hover {
+  transform: scale(1.08) translateZ(20px);
+  box-shadow: 0 20px 60px rgba(236, 72, 153, 0.8), 0 0 100px rgba(251, 191, 36, 0.5);
+}
+
+.performer-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+@keyframes hologramGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Performer Caption Plate */
+.stage-performer-badge {
+  position: absolute;
+  bottom: -46px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(60px);
+  background: rgba(12, 4, 18, 0.88);
+  border: 1px solid rgba(244, 114, 182, 0.4);
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(236, 72, 153, 0.4);
+  text-align: center;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+
+.performer-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.performer-role {
+  font-size: 0.72rem;
+  color: #f472b6;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* 3D ORBITING CELESTIAL PORTALS */
+.universe-portals-orbit-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.universe-portal-node {
+  position: absolute;
+  transform-style: preserve-3d;
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Portal Node Orb */
+.portal-orb-core {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.95), rgba(236, 72, 153, 0.8) 40%, rgba(12, 4, 18, 0.95) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.4);
+  color: #fff;
+  transition: all 0.35s ease;
+}
+
+.portal-pulse-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(244, 114, 182, 0.45);
+  animation: spinPortalRing 18s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes spinPortalRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.universe-portal-node:hover .portal-orb-core {
+  transform: scale(1.18);
+  box-shadow: 0 0 50px rgba(236, 72, 153, 0.95), 0 0 80px rgba(217, 70, 239, 0.6);
+  border-color: #fff;
+}
+
+.universe-portal-node:hover .portal-pulse-ring {
+  inset: -18px;
+  border-color: rgba(255, 255, 255, 0.8);
+  border-style: solid;
+}
+
+/* Individual Portal Theming */
+.portal-node-about .portal-orb-core {
+  background: radial-gradient(circle at 35% 35%, #fff, #ec4899 40%, #581c87 100%);
+}
+.portal-node-projects .portal-orb-core {
+  background: radial-gradient(circle at 35% 35%, #fff, #38bdf8 40%, #1e1b4b 100%);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
+}
+.portal-node-experience .portal-orb-core {
+  background: radial-gradient(circle at 35% 35%, #fff, #fbbf24 40%, #78350f 100%);
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.6);
+}
+.portal-node-resume .portal-orb-core {
+  background: radial-gradient(circle at 35% 35%, #fff, #a855f7 40%, #3b0764 100%);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+}
+.portal-node-contact .portal-orb-core {
+  background: radial-gradient(circle at 35% 35%, #fff, #34d399 40%, #064e3b 100%);
+  box-shadow: 0 0 30px rgba(52, 211, 153, 0.6);
+}
+
+/* Portal Node Labels */
+.portal-node-label {
+  background: rgba(12, 4, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.35rem 0.9rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.portal-label-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+.portal-label-hint {
+  font-size: 0.65rem;
+  color: #f472b6;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.universe-portal-node:hover .portal-node-label {
+  background: rgba(236, 72, 153, 0.35);
+  border-color: #ec4899;
+  transform: translateY(3px) scale(1.05);
+}
+
+/* DRAGGABLE COSMIC TECH PROPS */
+.draggable-cosmic-prop {
+  position: absolute;
+  padding: 0.45rem 0.9rem;
+  background: rgba(15, 6, 22, 0.75);
+  border: 1px solid rgba(244, 114, 182, 0.35);
+  border-radius: 30px;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 15px rgba(236, 72, 153, 0.3);
+  backdrop-filter: blur(8px);
+  z-index: 25;
+  user-select: none;
+  touch-action: none;
+}
+
+.draggable-cosmic-prop:active {
+  cursor: grabbing;
+}
+
+/* BOTTOM HUD FOOTER INSTRUCTIONS & CONTROLS */
+.universe-hud-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  background: linear-gradient(0deg, rgba(8, 3, 12, 0.9) 0%, rgba(8, 3, 12, 0) 100%);
+  backdrop-filter: blur(6px);
+  z-index: 50;
+  border-top: 1px solid rgba(236, 72, 153, 0.12);
+}
+
+.universe-instructions-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(244, 114, 182, 0.25);
+  padding: 0.45rem 1.1rem;
+  border-radius: 30px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.82rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pill-glow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ec4899;
+  box-shadow: 0 0 10px #ec4899;
+  animation: blinkDot 1.8s infinite;
+}
+
+@keyframes blinkDot {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.universe-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.action-resume-eye-btn {
+  background: linear-gradient(135deg, #ec4899, #d946ef);
+  color: #fff;
+  border: none;
+  padding: 0.55rem 1.25rem;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.86rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 0 25px rgba(236, 72, 153, 0.6);
+  transition: all 0.25s ease;
+}
+
+.action-resume-eye-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 35px rgba(236, 72, 153, 0.85);
+}
+
+.action-orbit-toggle-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  padding: 0.55rem 1rem;
+  border-radius: 25px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.25s ease;
+}
+
+.action-orbit-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #fff;
+}
+
+/* 3D THEATRICAL STAGE CHAMBER MODAL (When Portal is Clicked) */
+.stage-chamber-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 2, 7, 0.88);
+  backdrop-filter: blur(14px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  perspective: 1400px;
+}
+
+.stage-chamber-container {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  max-height: 90vh;
+  background: linear-gradient(145deg, rgba(20, 8, 28, 0.94) 0%, rgba(10, 4, 15, 0.97) 100%);
+  border: 1.5px solid rgba(244, 114, 182, 0.35);
+  border-radius: 28px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 60px rgba(236, 72, 153, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.chamber-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid rgba(244, 114, 182, 0.2);
+  background: rgba(8, 3, 12, 0.6);
+}
+
+.chamber-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.chamber-badge-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ec4899, #d946ef);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+}
+
+.chamber-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.chamber-subtitle {
+  font-size: 0.78rem;
+  color: #f472b6;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.chamber-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.chamber-nav-pill-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.chamber-nav-pill-btn:hover {
+  background: rgba(236, 72, 153, 0.25);
+  border-color: #ec4899;
+  color: #fff;
+}
+
+.chamber-close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.chamber-close-btn:hover {
+  background: #ec4899;
+  border-color: #ec4899;
+  transform: rotate(90deg);
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.8);
+}
+
+.chamber-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: #ec4899 rgba(0, 0, 0, 0.3);
+}
+
+.chamber-body::-webkit-scrollbar {
+  width: 6px;
+}
+.chamber-body::-webkit-scrollbar-thumb {
+  background: #ec4899;
+  border-radius: 4px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .universe-hud-bar {
+    padding: 0 1rem;
+    height: 60px;
+  }
+  .universe-quick-nav {
+    display: none;
+  }
+  .universe-center-podium {
+    width: 380px;
+    height: 380px;
+  }
+  .stage-ring-1 { width: 360px; height: 360px; }
+  .stage-ring-2 { width: 280px; height: 280px; }
+  .stage-ring-3 { width: 200px; height: 200px; }
+  .stage-center-plate { width: 130px; height: 130px; }
+  .performer-avatar-frame { width: 140px; height: 140px; }
+  .portal-orb-core { width: 64px; height: 64px; }
+  .universe-hud-bottom {
+    padding: 0 1rem;
+    height: 70px;
+  }
+  .universe-instructions-pill {
+    display: none;
+  }
+}

@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import DanceParticles from './components/DanceParticles';
 import ResumeModal from './components/ResumeModal';
 import StageLighting from './components/StageLighting';
+import TheatricalCurtains from './components/TheatricalCurtains';
 
 export default function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
@@ -18,10 +19,13 @@ export default function App() {
 
   return (
     <div className="app-wrapper">
-      {/* Theatrical Stage Spotlights & Footlights */}
+      {/* Authentic Theatrical Stage Curtains & Pelmet */}
+      <TheatricalCurtains />
+
+      {/* Theatrical Overhead Spotlights & Stage Footlights */}
       <StageLighting />
 
-      {/* Dynamic Background Blobs & Floating Dance Particles */}
+      {/* Atmospheric Stage Glow Blobs & Floating Dance Particles */}
       <div className="bg-blob blob-1"></div>
       <div className="bg-blob blob-2"></div>
       <div className="bg-blob blob-3"></div>
@@ -32,19 +36,28 @@ export default function App() {
       {/* Navigation Menu */}
       <Navbar onOpenResume={handleOpenResume} />
 
-      {/* Main Contents */}
+      {/* Main Contents in Proper Order */}
       <main>
+        {/* ACT 1: The Grand Dance Stage & Draggable Badges */}
         <Hero onOpenResume={handleOpenResume} />
+
+        {/* ACT 2: The Rhythm & Philosophy of Code (About Me) */}
         <About />
+
+        {/* ACT 3: The Stage Repertoire (Interactive 3D Drag Projects Carousel) */}
         <Projects />
+
+        {/* ACT 4: Career Milestones & Acts (Experience) */}
         <Experience />
+
+        {/* ACT 5: Curtain Call (Contact & Connect) */}
         <Contact />
       </main>
 
-      {/* Footer Details */}
+      {/* Footer / Encore Credits */}
       <Footer onOpenResume={handleOpenResume} />
 
-      {/* Resume Preview Modal */}
+      {/* Resume Preview Modal with Eye Icon */}
       <ResumeModal isOpen={isResumeOpen} onClose={handleCloseResume} />
     </div>
   );

@@ -1,42 +1,55 @@
+/* ===================================================
+   THE GRAND DANCE STAGE (FULL SCREEN THEATRICAL HERO)
+   =================================================== */
+
 .hero-section {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  overflow: hidden;
-  padding-top: 140px;
+  justify-content: center;
   position: relative;
+  padding: 110px 1.5rem 50px 1.5rem;
+  overflow: hidden;
+  text-align: center;
 }
 
-.hero-container {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 48px;
-  align-items: center;
-}
-
-.hero-text {
+.stage-theater-container {
+  width: 100%;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  z-index: 2;
+  align-items: center;
+  position: relative;
+  z-index: 10;
 }
 
-.hero-badge {
+/* TOP STAGE HEADLINE GROUP */
+.stage-headline-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 860px;
+  margin-bottom: 24px;
+}
+
+.stage-performer-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 18px;
+  padding: 6px 18px;
   border-radius: 9999px;
   font-size: 13px;
   font-weight: 600;
   color: #fdf2f8;
-  margin-bottom: 24px;
-  background: rgba(236, 72, 153, 0.08);
-  border: 1px solid rgba(236, 72, 153, 0.25);
-  box-shadow: 0 0 15px rgba(236, 72, 153, 0.15);
+  margin-bottom: 14px;
+  background: rgba(236, 72, 153, 0.12);
+  border: 1px solid rgba(236, 72, 153, 0.35);
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.25);
+  backdrop-filter: blur(8px);
 }
 
-.badge-pulse {
+.stage-badge-pulse {
   width: 8px;
   height: 8px;
   background-color: #ec4899;
@@ -45,7 +58,7 @@
   box-shadow: 0 0 10px #ec4899;
 }
 
-.badge-pulse::after {
+.stage-badge-pulse::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -54,295 +67,460 @@
   left: 0;
   background-color: #ec4899;
   border-radius: 50%;
-  animation: pulse 1.6s infinite;
+  animation: pulse-dot 1.8s infinite;
 }
 
-@keyframes pulse {
+@keyframes pulse-dot {
   0% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.8); opacity: 0; }
 }
 
-.hero-title {
-  font-size: 56px;
-  line-height: 1.1;
-  margin-bottom: 16px;
-  letter-spacing: -0.03em;
+.stage-main-title {
+  font-size: 52px;
+  line-height: 1.15;
+  margin-bottom: 10px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
-.hero-subtitle {
-  font-size: 27px;
+.stage-subtitle {
+  font-size: 21px;
   font-weight: 600;
-  line-height: 1.35;
-  margin-bottom: 24px;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  color: #fdf2f8;
 }
 
-.hero-description {
-  font-size: 16px;
+.stage-description {
+  font-size: 15px;
   color: var(--text-secondary);
-  max-width: 580px;
-  margin-bottom: 36px;
-  line-height: 1.75;
+  max-width: 720px;
+  line-height: 1.6;
+  margin-bottom: 8px;
 }
 
-.hero-actions {
+/* ===================================================
+   THE GRAND DANCE STAGE ARENA
+   =================================================== */
+
+.grand-dance-stage {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  height: 480px;
+  margin: 10px auto 25px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+/* 3D Illuminated Stage Floor Podium */
+.stage-floor-podium-wide {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%) rotateX(72deg);
+  width: 680px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(236, 72, 153, 0.45) 0%,
+    rgba(217, 70, 239, 0.28) 35%,
+    rgba(251, 191, 36, 0.15) 60%,
+    transparent 85%
+  );
+  border: 2px solid rgba(236, 72, 153, 0.5);
+  box-shadow: 0 0 60px rgba(236, 72, 153, 0.5), inset 0 0 40px rgba(217, 70, 239, 0.4);
+  pointer-events: none;
+  z-index: 1;
+  animation: stageFloorBreathe 6s ease-in-out infinite alternate;
+}
+
+.stage-podium-concentric-1 {
+  position: absolute;
+  inset: 18px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(251, 191, 36, 0.7);
+  animation: spinClockwise 35s linear infinite;
+}
+
+.stage-podium-concentric-2 {
+  position: absolute;
+  inset: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 114, 182, 0.45);
+  animation: spinCounter 26s linear infinite;
+}
+
+@keyframes stageFloorBreathe {
+  0% { transform: translateX(-50%) rotateX(72deg) scale(0.96); opacity: 0.8; }
+  100% { transform: translateX(-50%) rotateX(72deg) scale(1.04); opacity: 1; filter: drop-shadow(0 0 35px rgba(236, 72, 153, 0.7)); }
+}
+
+@keyframes spinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinCounter {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* CENTER DANCER PERFORMER HOLOGRAM */
+.stage-center-performer {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translateY(-20px);
+}
+
+.performer-avatar-frame-large {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  padding: 6px;
+  background: linear-gradient(135deg, #ec4899, #fbbf24, #d946ef, #f472b6);
+  background-size: 300% 300%;
+  animation: gradientRotate 6s ease infinite;
+  box-shadow: 0 15px 45px rgba(236, 72, 153, 0.55), 0 0 70px rgba(217, 70, 239, 0.35);
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.performer-avatar-frame-large:hover {
+  transform: scale(1.06);
+  box-shadow: 0 20px 60px rgba(236, 72, 153, 0.8), 0 0 90px rgba(251, 191, 36, 0.45);
+}
+
+.performer-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  border: 3px solid #1a0826;
+}
+
+@keyframes gradientRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.stage-performer-caption {
+  margin-top: 14px;
+  background: rgba(18, 6, 26, 0.85);
+  border: 1px solid rgba(244, 114, 182, 0.35);
+  padding: 5px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ===================================================
+   CLICKABLE STAGE PERFORMANCE PORTALS
+   =================================================== */
+
+.stage-portal-btn {
+  position: absolute;
+  z-index: 12;
+  cursor: pointer;
+  background: rgba(22, 8, 32, 0.82);
+  border: 1.5px solid rgba(244, 114, 182, 0.35);
+  border-radius: 24px;
+  padding: 9px 18px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(236, 72, 153, 0.25);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+.stage-portal-btn:hover {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.35), rgba(217, 70, 239, 0.4));
+  border-color: #ec4899;
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 15px 40px rgba(236, 72, 153, 0.6), 0 0 35px rgba(217, 70, 239, 0.5);
+}
+
+.portal-icon-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ec4899, #d946ef);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.5);
+}
+
+.portal-title-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.portal-name {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.portal-hint {
+  font-size: 10px;
+  color: #f472b6;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Specific Positions for the 5 Portals on the Stage */
+.portal-pos-about {
+  top: 18%;
+  left: 6%;
+}
+
+.portal-pos-projects {
+  top: 12%;
+  right: 6%;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+.portal-pos-projects .portal-icon-wrap {
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+}
+
+.portal-pos-experience {
+  bottom: 22%;
+  left: 3%;
+  border-color: rgba(251, 191, 36, 0.4);
+}
+.portal-pos-experience .portal-icon-wrap {
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+}
+
+.portal-pos-resume {
+  bottom: 12%;
+  right: 4%;
+  border-color: rgba(236, 72, 153, 0.5);
+}
+
+.portal-pos-contact {
+  top: 55%;
+  right: 2%;
+  border-color: rgba(52, 211, 153, 0.4);
+}
+.portal-pos-contact .portal-icon-wrap {
+  background: linear-gradient(135deg, #34d399, #059669);
+}
+
+/* ===================================================
+   DRAGGABLE STAGE BADGES (PHYSICS PLAYGROUND)
+   =================================================== */
+
+.draggable-stage-badge {
+  position: absolute;
+  z-index: 15;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.draggable-stage-badge:active {
+  cursor: grabbing;
+}
+
+.badge-dance {
+  top: 2%;
+  left: 32%;
+  border: 1px solid rgba(236, 72, 153, 0.6);
+  background: rgba(236, 72, 153, 0.25);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.35);
+}
+
+.badge-ghungroo {
+  top: 2%;
+  right: 30%;
+  border: 1px solid rgba(251, 191, 36, 0.6);
+  background: rgba(251, 191, 36, 0.22);
+  color: #fef08a;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+}
+
+.badge-python {
+  bottom: 26%;
+  right: 18%;
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  background: rgba(56, 189, 248, 0.2);
+  color: #bae6fd;
+}
+
+.badge-ai {
+  bottom: 40%;
+  left: 14%;
+  border: 1px solid rgba(168, 85, 247, 0.55);
+  background: rgba(168, 85, 247, 0.22);
+  color: #e9d5ff;
+}
+
+.badge-react {
+  bottom: 6%;
+  left: 28%;
+  border: 1px solid rgba(244, 114, 182, 0.5);
+  background: rgba(244, 114, 182, 0.2);
+  color: #fbcfe8;
+}
+
+.badge-trading {
+  bottom: 6%;
+  right: 26%;
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  background: rgba(251, 191, 36, 0.2);
+  color: #fde68a;
+}
+
+/* STAGE DRAG HINT PILL */
+.stage-interactive-hint {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fbbf24;
+  background: rgba(15, 6, 22, 0.9);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  border-radius: 9999px;
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.25);
+  z-index: 20;
+}
+
+/* BOTTOM FOOTLIGHT ACTIONS & SOCIALS */
+.stage-footlight-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 15px;
+  z-index: 10;
+}
+
+.stage-btn-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
 }
 
-.resume-preview-btn {
-  background: rgba(236, 72, 153, 0.12) !important;
-  color: #fdf2f8 !important;
-  border: 1px solid rgba(236, 72, 153, 0.45) !important;
-  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.15);
+.stage-preview-resume-btn {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(217, 70, 239, 0.35)) !important;
+  color: #fff !important;
+  border: 1px solid rgba(236, 72, 153, 0.6) !important;
+  box-shadow: 0 0 25px rgba(236, 72, 153, 0.35) !important;
 }
 
-.resume-preview-btn:hover {
-  background: rgba(236, 72, 153, 0.25) !important;
-  border-color: #ec4899 !important;
-  box-shadow: 0 0 20px rgba(236, 72, 153, 0.45);
+.stage-preview-resume-btn:hover {
+  background: linear-gradient(135deg, #ec4899, #d946ef) !important;
+  box-shadow: 0 0 35px rgba(236, 72, 153, 0.7) !important;
 }
 
 .hero-socials {
   display: flex;
   gap: 16px;
+  align-items: center;
+  justify-content: center;
 }
 
 .social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(236, 72, 153, 0.15);
-  background: rgba(236, 72, 153, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--text-secondary);
-  cursor: pointer;
-  transition: var(--transition-normal);
+  background: rgba(236, 72, 153, 0.06);
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  transition: all 0.25s ease;
 }
 
 .social-icon:hover {
-  color: #fdf2f8;
-  border-color: #ec4899;
+  color: #fff;
   background: rgba(236, 72, 153, 0.2);
-  transform: translateY(-3px) rotate(8deg);
-  box-shadow: 0 0 20px rgba(236, 72, 153, 0.35);
+  border-color: #ec4899;
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
 }
 
-/* Hero Visual & 3D Stage Environment */
-.hero-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-  perspective: 1000px;
-}
-
-.avatar-wrapper {
-  position: relative;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 3D Stage Floor Podium */
-.stage-podium-3d {
-  position: absolute;
-  bottom: -55px;
-  width: 420px;
-  height: 180px;
-  border-radius: 50%;
-  transform: perspective(600px) rotateX(68deg);
-  background: radial-gradient(ellipse at center, rgba(236, 72, 153, 0.45) 0%, rgba(217, 70, 239, 0.22) 40%, rgba(168, 85, 247, 0.1) 70%, transparent 100%);
-  border: 2px solid rgba(236, 72, 153, 0.45);
-  box-shadow: 0 0 50px rgba(236, 72, 153, 0.55), inset 0 0 35px rgba(217, 70, 239, 0.4);
-  pointer-events: none;
-  z-index: 1;
-  animation: stage-podium-pulse 5s ease-in-out infinite alternate;
-}
-
-.stage-podium-ring {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
-  border-radius: 50%;
-  border: 1px dashed rgba(251, 191, 36, 0.65);
-  animation: rotate-ring 22s linear infinite reverse;
-}
-
-@keyframes stage-podium-pulse {
-  0% { transform: perspective(600px) rotateX(68deg) scale(0.98); opacity: 0.8; }
-  100% { transform: perspective(600px) rotateX(68deg) scale(1.04); opacity: 1; filter: drop-shadow(0 0 25px rgba(236, 72, 153, 0.6)); }
-}
-
-.avatar-glow {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle, #ec4899 0%, #d946ef 45%, transparent 70%);
-  opacity: 0.45;
-  filter: blur(18px);
-  animation: glow-pulse 4s ease-in-out infinite alternate;
-}
-
-@keyframes glow-pulse {
-  0% { transform: scale(0.95); opacity: 0.35; }
-  100% { transform: scale(1.08); opacity: 0.55; }
-}
-
-.avatar-ring {
-  position: absolute;
-  width: calc(100% + 20px);
-  height: calc(100% + 20px);
-  border-radius: 50%;
-  border: 2px dashed rgba(236, 72, 153, 0.6);
-  box-shadow: 0 0 20px rgba(217, 70, 239, 0.25);
-  animation: rotate-ring 28s linear infinite;
-}
-
-@keyframes rotate-ring {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid #1a0826;
-  box-shadow: 0 0 35px rgba(0, 0, 0, 0.6);
-  position: relative;
-  z-index: 2;
-  transition: transform 0.4s ease;
-}
-
-.avatar-wrapper:hover .avatar-img {
-  transform: scale(1.03);
-}
-
-/* Draggable Floating Tech Badges */
-.floating-tech {
-  position: absolute;
-  padding: 8px 18px;
-  border-radius: 9999px;
-  font-size: 13px;
-  font-weight: 600;
-  white-space: nowrap;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  z-index: 3;
-  cursor: grab;
-  user-select: none;
-  touch-action: none;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.floating-tech:active {
-  cursor: grabbing;
-}
-
-.tech-react {
-  top: 10%;
-  right: -30px;
-  border-color: rgba(236, 72, 153, 0.45);
-  background: rgba(236, 72, 153, 0.18);
-  backdrop-filter: blur(8px);
-  color: #fdf2f8;
-  box-shadow: 0 4px 20px rgba(236, 72, 153, 0.25);
-}
-
-.tech-ts {
-  bottom: 25%;
-  left: -40px;
-  border-color: rgba(168, 85, 247, 0.45);
-  background: rgba(168, 85, 247, 0.18);
-  backdrop-filter: blur(8px);
-  color: #fdf2f8;
-  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.25);
-}
-
-.tech-node {
-  bottom: 6%;
-  right: -10px;
-  border-color: rgba(244, 63, 94, 0.45);
-  background: rgba(244, 63, 94, 0.18);
-  backdrop-filter: blur(8px);
-  color: #fdf2f8;
-  box-shadow: 0 4px 20px rgba(244, 63, 94, 0.25);
-}
-
-.tech-fyers {
-  top: 40%;
-  right: -45px;
-  border-color: rgba(251, 191, 36, 0.45);
-  background: rgba(251, 191, 36, 0.18);
-  backdrop-filter: blur(8px);
-  color: #fdf2f8;
-  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.25);
-}
-
-.drag-hint-badge {
-  position: absolute;
-  bottom: -32px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 14px;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #fbbf24;
-  background: rgba(14, 6, 20, 0.88);
-  border: 1px solid rgba(251, 191, 36, 0.35);
-  border-radius: 9999px;
-  box-shadow: 0 0 14px rgba(251, 191, 36, 0.25);
-  z-index: 4;
-}
-
-@media (max-width: 992px) {
-  .hero-container {
-    grid-template-columns: 1fr;
-    gap: 60px;
-    text-align: center;
+/* RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .stage-main-title {
+    font-size: 36px;
   }
-
-  .hero-text {
-    align-items: center;
+  .stage-subtitle {
+    font-size: 18px;
   }
-
-  .hero-title {
-    font-size: 44px;
+  .grand-dance-stage {
+    height: 400px;
   }
-
-  .hero-subtitle {
-    font-size: 22px;
+  .stage-floor-podium-wide {
+    width: 380px;
+    height: 180px;
   }
-
-  .hero-actions {
-    justify-content: center;
+  .performer-avatar-frame-large {
+    width: 150px;
+    height: 150px;
   }
-
-  .hero-socials {
-    justify-content: center;
+  .stage-portal-btn {
+    padding: 6px 12px;
+    font-size: 11px;
   }
-
-  .avatar-wrapper {
-    width: 260px;
-    height: 260px;
+  .portal-name {
+    font-size: 11px;
   }
-
-  .stage-podium-3d {
-    width: 320px;
-    height: 140px;
+  .portal-hint {
+    display: none;
+  }
+  .draggable-stage-badge {
+    padding: 4px 10px;
+    font-size: 10px;
   }
 }
