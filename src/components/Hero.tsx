@@ -1,14 +1,5 @@
 import { motion, type Variants } from 'framer-motion';
-import {
-  Sparkles,
-  Layers,
-  Briefcase,
-  Eye,
-  Send,
-  Download,
-  ArrowRight,
-  Move
-} from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import avatarImg from '../assets/profile.jpg';
 import ThreeDancerStage from './ThreeDancerStage';
 import './Hero.css';
@@ -49,36 +40,36 @@ interface HeroProps {
   onOpenResume?: () => void;
 }
 
-export default function Hero({ onOpenResume }: HeroProps) {
+export default function Hero(_props: HeroProps = {}) {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.12,
         delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 22, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
         type: 'spring' as const,
-        stiffness: 90,
-        damping: 14,
+        stiffness: 85,
+        damping: 15,
       },
     },
   };
 
   const floatVariants1: Variants = {
     animate: {
-      y: [0, -8, 0],
+      y: [0, -10, 0],
       transition: {
-        duration: 4,
+        duration: 4.2,
         repeat: Infinity,
         ease: 'easeInOut' as const,
       },
@@ -87,26 +78,21 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
   const floatVariants2: Variants = {
     animate: {
-      y: [0, 8, 0],
+      y: [0, 10, 0],
       transition: {
-        duration: 4.5,
+        duration: 4.8,
         repeat: Infinity,
         ease: 'easeInOut' as const,
       },
     },
   };
 
-  const handleScrollTo = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section id="home" className="hero-section">
       <div className="stage-theater-container">
-        {/* TOP THEATRICAL HEADLINE */}
+        {/* ===================================================
+            TOP THEATRICAL HEADLINE GROUP (CLEAN & AIRY)
+            =================================================== */}
         <motion.div
           className="stage-headline-group"
           variants={containerVariants}
@@ -115,17 +101,17 @@ export default function Hero({ onOpenResume }: HeroProps) {
         >
           <motion.div className="stage-performer-badge" variants={itemVariants}>
             <img src={avatarImg} alt="Aiswarya Babu" className="badge-profile-thumb" />
-            <span className="stage-badge-pulse"></span>
+            <span className="stage-badge-pulse" />
             <Sparkles size={14} style={{ color: '#fbbf24' }} />
-            Choreographing Scalable Architecture • Senior Software Developer & Classical Dancer
+            <span>Senior Software Engineer • Classical Dancer</span>
           </motion.div>
 
-          <motion.h1 className="stage-main-title text-gradient" variants={itemVariants}>
-            Hi, I'm <span className="text-gradient-accent">Aiswarya Babu</span>
+          <motion.h1 className="stage-main-title" variants={itemVariants}>
+            Hi, I'm <span className="text-gradient-accent stage-name-glint">Aiswarya Babu</span>
           </motion.h1>
 
           <motion.h2 className="stage-subtitle" variants={itemVariants}>
-            Scalable Backends, Distributed Microservices & AI Platforms
+            Scalable Distributed Backends, Microservices & AI Platforms
           </motion.h2>
 
           <motion.p className="stage-description" variants={itemVariants}>
@@ -133,244 +119,109 @@ export default function Hero({ onOpenResume }: HeroProps) {
           </motion.p>
         </motion.div>
 
-        {/* THE GRAND DANCE STAGE ARENA */}
+        {/* ===================================================
+            THE EXPANSIVE HOLOGRAPHIC ILLUSION STAGE ARENA
+            (UNOBSTRUCTED, CINEMATIC & CENTRALLY FOCUSED)
+            =================================================== */}
         <motion.div
-          className="grand-dance-stage"
-          initial={{ opacity: 0, scale: 0.9 }}
+          className="grand-illusion-stage"
+          initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, type: 'spring', stiffness: 60 }}
+          transition={{ duration: 0.8, type: 'spring', stiffness: 55 }}
         >
           {/* 3D Illuminated Stage Floor Podium */}
           <div className="stage-floor-podium-wide">
-            <div className="stage-podium-concentric-1"></div>
-            <div className="stage-podium-concentric-2"></div>
+            <div className="stage-podium-concentric-1" />
+            <div className="stage-podium-concentric-2" />
+            <div className="stage-podium-laser-grid" />
           </div>
 
-          {/* 3D LIVE DANCING PERSON (THREE.JS) */}
-          <ThreeDancerStage onStageClick={() => handleScrollTo('about')} />
+          {/* 3D LIVE DANCING PERSON (THREE.JS with Volumetric Hologram & Slim HUD) */}
+          <ThreeDancerStage />
 
           {/* ===================================================
-              CLICKABLE STAGE PERFORMANCE PORTALS
+              ORBITAL HOLOGRAPHIC SKILL CAPSULES (NON-OBSTRUCTIVE)
               =================================================== */}
-
-          {/* 1. The Spotlight (About) */}
-          <motion.div
-            className="stage-portal-btn portal-pos-about"
-            whileHover={{ scale: 1.1, translateY: -4 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => handleScrollTo('about')}
-            title="Step into The Spotlight: About Me & Philosophy"
-          >
-            <div className="portal-icon-wrap">
-              <Sparkles size={16} />
-            </div>
-            <div className="portal-title-text">
-              <span className="portal-name">About Me</span>
-              <span className="portal-hint">The Spotlight</span>
-            </div>
-          </motion.div>
-
-          {/* 2. The Choreography (Projects) */}
-          <motion.div
-            className="stage-portal-btn portal-pos-projects"
-            whileHover={{ scale: 1.1, translateY: -4 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => handleScrollTo('projects')}
-            title="Explore The Choreography: Featured Projects"
-          >
-            <div className="portal-icon-wrap">
-              <Layers size={16} />
-            </div>
-            <div className="portal-title-text">
-              <span className="portal-name">Featured Projects</span>
-              <span className="portal-hint">The Choreography</span>
-            </div>
-          </motion.div>
-
-          {/* 3. The Repertoire (Experience) */}
-          <motion.div
-            className="stage-portal-btn portal-pos-experience"
-            whileHover={{ scale: 1.1, translateY: -4 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => handleScrollTo('experience')}
-            title="View The Repertoire: Career Chronicles"
-          >
-            <div className="portal-icon-wrap">
-              <Briefcase size={16} />
-            </div>
-            <div className="portal-title-text">
-              <span className="portal-name">Experience</span>
-              <span className="portal-hint">The Repertoire</span>
-            </div>
-          </motion.div>
-
-          {/* 4. Backstage Pass (Preview Resume) */}
-          <motion.div
-            className="stage-portal-btn portal-pos-resume"
-            whileHover={{ scale: 1.1, translateY: -4 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={onOpenResume}
-            title="Backstage Pass: Preview Full Verified Resume"
-          >
-            <div className="portal-icon-wrap">
-              <Eye size={16} />
-            </div>
-            <div className="portal-title-text">
-              <span className="portal-name">Preview Resume</span>
-              <span className="portal-hint">Backstage Pass</span>
-            </div>
-          </motion.div>
-
-          {/* 5. Curtain Call (Contact) */}
-          <motion.div
-            className="stage-portal-btn portal-pos-contact"
-            whileHover={{ scale: 1.1, translateY: -4 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => handleScrollTo('contact')}
-            title="Curtain Call: Audition & Get in Touch"
-          >
-            <div className="portal-icon-wrap">
-              <Send size={16} />
-            </div>
-            <div className="portal-title-text">
-              <span className="portal-name">Contact Me</span>
-              <span className="portal-hint">Curtain Call</span>
-            </div>
-          </motion.div>
-
-          {/* ===================================================
-              DRAGGABLE STAGE BADGES (PHYSICS PLAYGROUND)
-              =================================================== */}
-
           <motion.div
             drag
-            dragConstraints={{ top: -180, bottom: 180, left: -260, right: 260 }}
-            dragElastic={0.2}
-            whileDrag={{ scale: 1.18, zIndex: 60, cursor: 'grabbing' }}
-            whileHover={{ scale: 1.1, cursor: 'grab' }}
-            className="draggable-stage-badge badge-dance"
+            dragConstraints={{ top: -140, bottom: 140, left: -220, right: 220 }}
+            dragElastic={0.25}
+            whileDrag={{ scale: 1.15, zIndex: 50, cursor: 'grabbing' }}
+            whileHover={{ scale: 1.08, cursor: 'grab' }}
+            className="holo-orbit-badge badge-orbit-top-left"
             variants={floatVariants1}
             animate="animate"
-            title="Click & Drag me across the stage!"
+            title="Python & FastAPI Microservices"
           >
-            💃 Classical Dance & Art
+            <span className="badge-icon">🐍</span>
+            <span className="badge-text">Python & FastAPI</span>
           </motion.div>
 
           <motion.div
             drag
-            dragConstraints={{ top: -180, bottom: 180, left: -260, right: 260 }}
-            dragElastic={0.2}
-            whileDrag={{ scale: 1.18, zIndex: 60, cursor: 'grabbing' }}
-            whileHover={{ scale: 1.1, cursor: 'grab' }}
-            className="draggable-stage-badge badge-ghungroo"
+            dragConstraints={{ top: -140, bottom: 140, left: -220, right: 220 }}
+            dragElastic={0.25}
+            whileDrag={{ scale: 1.15, zIndex: 50, cursor: 'grabbing' }}
+            whileHover={{ scale: 1.08, cursor: 'grab' }}
+            className="holo-orbit-badge badge-orbit-top-right"
             variants={floatVariants2}
             animate="animate"
-            title="Click & Drag me across the stage!"
+            title="GenAI & LLM Orchestration"
           >
-            🔔 Ghungroo Rhythm & Beats
+            <span className="badge-icon">🤖</span>
+            <span className="badge-text">GenAI & GPT-4o</span>
           </motion.div>
 
           <motion.div
             drag
-            dragConstraints={{ top: -180, bottom: 180, left: -260, right: 260 }}
-            dragElastic={0.2}
-            whileDrag={{ scale: 1.18, zIndex: 60, cursor: 'grabbing' }}
-            whileHover={{ scale: 1.1, cursor: 'grab' }}
-            className="draggable-stage-badge badge-python"
+            dragConstraints={{ top: -140, bottom: 140, left: -220, right: 220 }}
+            dragElastic={0.25}
+            whileDrag={{ scale: 1.15, zIndex: 50, cursor: 'grabbing' }}
+            whileHover={{ scale: 1.08, cursor: 'grab' }}
+            className="holo-orbit-badge badge-orbit-mid-left"
+            variants={floatVariants2}
+            animate="animate"
+            title="Fyers Trading OMS Engine"
+          >
+            <span className="badge-icon">📈</span>
+            <span className="badge-text">Trading OMS</span>
+          </motion.div>
+
+          <motion.div
+            drag
+            dragConstraints={{ top: -140, bottom: 140, left: -220, right: 220 }}
+            dragElastic={0.25}
+            whileDrag={{ scale: 1.15, zIndex: 50, cursor: 'grabbing' }}
+            whileHover={{ scale: 1.08, cursor: 'grab' }}
+            className="holo-orbit-badge badge-orbit-mid-right"
             variants={floatVariants1}
             animate="animate"
-            title="Click & Drag me across the stage!"
+            title="React 19 & Next.js"
           >
-            🐍 Python & FastAPI
+            <span className="badge-icon">⚛️</span>
+            <span className="badge-text">React 19 & Next.js</span>
           </motion.div>
 
           <motion.div
             drag
-            dragConstraints={{ top: -180, bottom: 180, left: -260, right: 260 }}
-            dragElastic={0.2}
-            whileDrag={{ scale: 1.18, zIndex: 60, cursor: 'grabbing' }}
-            whileHover={{ scale: 1.1, cursor: 'grab' }}
-            className="draggable-stage-badge badge-ai"
+            dragConstraints={{ top: -140, bottom: 140, left: -220, right: 220 }}
+            dragElastic={0.25}
+            whileDrag={{ scale: 1.15, zIndex: 50, cursor: 'grabbing' }}
+            whileHover={{ scale: 1.08, cursor: 'grab' }}
+            className="holo-orbit-badge badge-orbit-bottom"
             variants={floatVariants2}
             animate="animate"
-            title="Click & Drag me across the stage!"
+            title="Classical Dance & Rhythmic Precision"
           >
-            🤖 GenAI & GPT-4o
+            <span className="badge-icon">💃</span>
+            <span className="badge-text">Classical Dance & Art</span>
           </motion.div>
-
-          <motion.div
-            drag
-            dragConstraints={{ top: -180, bottom: 180, left: -260, right: 260 }}
-            dragElastic={0.2}
-            whileDrag={{ scale: 1.18, zIndex: 60, cursor: 'grabbing' }}
-            whileHover={{ scale: 1.1, cursor: 'grab' }}
-            className="draggable-stage-badge badge-react"
-            variants={floatVariants1}
-            animate="animate"
-            title="Click & Drag me across the stage!"
-          >
-            ⚛️ React 19 & Next.js
-          </motion.div>
-
-          <motion.div
-            drag
-            dragConstraints={{ top: -180, bottom: 180, left: -260, right: 260 }}
-            dragElastic={0.2}
-            whileDrag={{ scale: 1.18, zIndex: 60, cursor: 'grabbing' }}
-            whileHover={{ scale: 1.1, cursor: 'grab' }}
-            className="draggable-stage-badge badge-trading"
-            variants={floatVariants2}
-            animate="animate"
-            title="Click & Drag me across the stage!"
-          >
-            📈 Fyers Trading OMS
-          </motion.div>
-
-          {/* STAGE DRAG HINT PILL */}
-          <div className="stage-interactive-hint">
-            <Move size={12} /> Click stage portals to enter • Drag badges across stage
-          </div>
         </motion.div>
 
-        {/* BOTTOM STAGE ACTIONS & SOCIALS */}
+        {/* ===================================================
+            ELEGANT SOCIAL CONNECT FOOTLIGHTS
+            =================================================== */}
         <div className="stage-footlight-actions">
-          <div className="stage-btn-row">
-            <button
-              onClick={() => handleScrollTo('projects')}
-              className="btn btn-primary"
-            >
-              Explore Projects <ArrowRight size={17} />
-            </button>
-
-            {onOpenResume && (
-              <button
-                onClick={onOpenResume}
-                className="btn stage-preview-resume-btn"
-                title="Preview Verified Resume"
-              >
-                <Eye size={17} /> Preview Resume
-              </button>
-            )}
-
-            <a
-              href="/Resume_Aiswaryababu.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-              download="Resume_Aiswarya_Babu.pdf"
-              title="Download Resume PDF"
-            >
-              <Download size={16} /> Download CV
-            </a>
-
-            <button
-              onClick={() => handleScrollTo('contact')}
-              className="btn btn-secondary"
-            >
-              Contact Me
-            </button>
-          </div>
-
           <div className="hero-socials">
             <a
               href="https://linkedin.com/in/aiswarya-babu-ab49b0278"
@@ -380,7 +231,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
               aria-label="LinkedIn Profile"
               title="LinkedIn: aiswarya-babu-ab49b0278"
             >
-              <LinkedinIcon size={20} />
+              <LinkedinIcon size={19} />
             </a>
             <a
               href="https://github.com/Aiswaryababu3"
@@ -390,7 +241,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
               aria-label="GitHub Profile"
               title="GitHub: Aiswaryababu3"
             >
-              <GithubIcon size={20} />
+              <GithubIcon size={19} />
             </a>
             <a
               href="mailto:aiswaryababu544@gmail.com"
@@ -398,7 +249,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
               aria-label="Email"
               title="aiswaryababu544@gmail.com"
             >
-              <MailIcon size={20} />
+              <MailIcon size={19} />
             </a>
             <a
               href="tel:+916369632313"
@@ -406,7 +257,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
               aria-label="Phone"
               title="+91 6369632313"
             >
-              <PhoneIcon size={20} />
+              <PhoneIcon size={19} />
             </a>
           </div>
         </div>
