@@ -2014,3 +2014,75 @@
     display: none;
   }
 }
+
+/* ----------------------------------------------------
+   Michelle Dancer Interactive Floating Speech Bubble
+   ---------------------------------------------------- */
+.michelle-floating-speech-bubble {
+  position: fixed;
+  top: 24%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  background: rgba(22, 6, 34, 0.88);
+  border: 1px solid rgba(251, 191, 36, 0.6);
+  border-radius: 999px;
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.7),
+    0 0 24px rgba(251, 191, 36, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  pointer-events: none;
+  animation: speechBubblePop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  white-space: nowrap;
+}
+
+.michelle-floating-speech-bubble .bubble-sparkle {
+  color: #fbbf24;
+  font-size: 14px;
+  display: inline-block;
+  animation: sparkleSpin 1.5s infinite linear;
+}
+
+.michelle-floating-speech-bubble .bubble-text {
+  font-family: var(--dj-font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  background: linear-gradient(135deg, #ffffff 0%, #fef08a 60%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes speechBubblePop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 15px) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@keyframes sparkleSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@media (max-width: 768px) {
+  .michelle-floating-speech-bubble {
+    top: 18%;
+    padding: 8px 16px;
+  }
+  .michelle-floating-speech-bubble .bubble-text {
+    font-size: 11px;
+  }
+}
+

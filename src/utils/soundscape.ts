@@ -1,4 +1,4 @@
-// Web Audio API Procedural Ambient Soundscape for Cinematic Dance Journey
+// Web Audio API Procedural Ambient Soundscape & Interactive Ghungroo Chimes
 
 class AmbientSoundscape {
   private ctx: AudioContext | null = null;
@@ -6,11 +6,14 @@ class AmbientSoundscape {
   private masterGain: GainNode | null = null;
   private oscs: OscillatorNode[] = [];
   private currentSceneNumber: number = 1;
+  private tapCounter: number = 0;
 
   public init() {
     if (this.ctx) return;
     try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       this.ctx = new AudioCtx();
       this.masterGain = this.ctx.createGain();
       this.masterGain.gain.setValueAtTime(0, this.ctx.currentTime);
@@ -68,6 +71,73 @@ class AmbientSoundscape {
     this.modulateDrone(sceneNum);
   }
 
+  /**
+   * Universal Interactive Tap Sound
+   * Plays a sweet, harmonic Ghungroo bell / metallic chime on every click anywhere!
+   */
+  public playInteractiveTap(screenX?: number, screenY?: number) {
+    try {
+      if (!this.ctx) {
+        this.init();
+      }
+      if (!this.ctx) return;
+
+      if (this.ctx.state === 'suspended') {
+        this.ctx.resume();
+      }
+
+      this.tapCounter++;
+
+      // Pentatonic / Raga Mohanam scale frequencies (D4, E4, F#4, A4, B4, D5, E5, F#5, A5, B5)
+      const scale = [293.66, 329.63, 369.99, 440.0, 493.88, 587.33, 659.25, 739.99, 880.0, 987.77];
+
+      let noteIdx: number;
+      if (screenX !== undefined && typeof window !== 'undefined') {
+        const norm = Math.min(Math.max(screenX / window.innerWidth, 0), 0.99);
+        noteIdx = Math.floor(norm * scale.length);
+      } else {
+        noteIdx = this.tapCounter % scale.length;
+      }
+
+      const freq = scale[noteIdx];
+      const now = this.ctx.currentTime;
+
+      // 1. Fundamental metallic sine tone
+      const osc1 = this.ctx.createOscillator();
+      const gain1 = this.ctx.createGain();
+
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(freq, now);
+
+      gain1.gain.setValueAtTime(0.045, now);
+      gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.65);
+
+      osc1.connect(gain1);
+      gain1.connect(this.ctx.destination);
+
+      osc1.start(now);
+      osc1.stop(now + 0.65);
+
+      // 2. High harmonic bell shimmer (ghungroo metallic overtone)
+      const osc2 = this.ctx.createOscillator();
+      const gain2 = this.ctx.createGain();
+
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(freq * 2.76, now); // Natural bell overtone ratio
+
+      gain2.gain.setValueAtTime(0.02, now);
+      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+
+      osc2.connect(gain2);
+      gain2.connect(this.ctx.destination);
+
+      osc2.start(now);
+      osc2.stop(now + 0.35);
+    } catch {
+      // Audio autoplay policy fallback
+    }
+  }
+
   private startAmbientDrone() {
     if (!this.ctx || !this.masterGain) return;
     this.stopOscs();
@@ -100,7 +170,6 @@ class AmbientSoundscape {
 
   private modulateDrone(sceneNum: number) {
     if (!this.ctx || this.oscs.length === 0) return;
-    // Scene 7 (Beyond Code) is warm champagne gold (shift to F# / A major feel)
     const scaleFactor = sceneNum === 7 ? 1.12 : sceneNum === 9 ? 1.25 : 1.0;
     const baseFreqs = [73.42, 110.0, 164.81, 220.0];
 

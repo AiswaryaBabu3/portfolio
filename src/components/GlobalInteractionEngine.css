@@ -1,0 +1,112 @@
+/* ===================================================
+   OMNIPRESENT GLOBAL CLICK INTERACTION FX & CURSOR TRAIL
+   =================================================== */
+
+.global-interaction-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+  user-select: none;
+}
+
+.cursor-ribbon-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.click-shockwave-container {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Expanding Shockwave Rings */
+.shockwave-ring {
+  position: absolute;
+  border-radius: 50%;
+  border-style: solid;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.ring-primary {
+  border-width: 2.5px;
+  animation: shockwavePulse 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ring-secondary {
+  border-width: 1.5px;
+  animation: shockwavePulse 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
+}
+
+@keyframes shockwavePulse {
+  0% {
+    width: 0px;
+    height: 0px;
+    opacity: 1;
+    transform: scale(0.2);
+  }
+  100% {
+    width: 220px;
+    height: 220px;
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* Floating Reaction Word */
+.click-floating-badge {
+  position: absolute;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: floatReaction 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes floatReaction {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-25px) scale(1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-70px) scale(0.9);
+  }
+}
+
+/* Radial Particle Sparks */
+.click-spark-particle {
+  position: absolute;
+  font-weight: 900;
+  pointer-events: none;
+  animation: sparkBurst 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sparkBurst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1.4) rotate(0deg);
+  }
+  80% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--p-dx), var(--p-dy)) scale(0.3) rotate(180deg);
+  }
+}

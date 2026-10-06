@@ -14,12 +14,14 @@ import Scene07Beyond from './components/journey/Scene07Beyond';
 import Scene08AIOrb from './components/journey/Scene08AIOrb';
 import Scene09Finale from './components/journey/Scene09Finale';
 import ResumeModal from './components/ResumeModal';
+import GlobalInteractionEngine from './components/GlobalInteractionEngine';
 import './index.css';
 
 export default function App() {
   const [currentScene, setCurrentScene] = useState<SceneNumber>(1);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [danceEffect, setDanceEffect] = useState<string | null>(null);
+  const [clickTrigger, setClickTrigger] = useState<{ x: number; y: number; time: number } | null>(null);
   const lastScrollTime = useRef<number>(0);
 
   const handleSelectScene = (scene: SceneNumber) => {
@@ -124,6 +126,12 @@ export default function App() {
       <DanceJourneyCanvas
         currentScene={currentScene}
         triggerDanceEffect={danceEffect}
+        clickTrigger={clickTrigger}
+      />
+
+      {/* Omnipresent Interactive Physics & Visual FX Layer */}
+      <GlobalInteractionEngine
+        onCanvasTap={(x, y) => setClickTrigger({ x, y, time: Date.now() })}
       />
 
       {/* Atmospheric Stage Background Glow Blobs */}

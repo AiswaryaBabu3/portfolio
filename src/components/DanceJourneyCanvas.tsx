@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { SceneNumber } from '../types/journey';
@@ -7,6 +7,7 @@ interface DanceJourneyCanvasProps {
   currentScene: SceneNumber;
   onLoaded?: () => void;
   triggerDanceEffect?: string | null;
+  clickTrigger?: { x: number; y: number; time: number } | null;
 }
 
 // Target Camera configurations per scene
@@ -127,6 +128,7 @@ export default function DanceJourneyCanvas({
   currentScene,
   onLoaded,
   triggerDanceEffect,
+  clickTrigger,
 }: DanceJourneyCanvasProps) {
   const mountRef = useRef<HTMLDivElement>(null);
   const mixerRef = useRef<THREE.AnimationMixer | null>(null);
@@ -139,6 +141,10 @@ export default function DanceJourneyCanvas({
   const portalRingRef = useRef<THREE.Mesh | null>(null);
   const illuminatedPathRef = useRef<THREE.Group | null>(null);
   const aiOrbRef = useRef<THREE.Group | null>(null);
+  const dynamicClickRingRef = useRef<THREE.Mesh | null>(null);
+  const clickRingScaleRef = useRef(0);
+  const [dancerDialogue, setDancerDialogue] = useState<{ text: string; id: number } | null>(null);
+
   const targetCameraPos = useRef(new THREE.Vector3(0, 1.35, 3.8));
   const targetCameraLookAt = useRef(new THREE.Vector3(0, 0.95, 0));
   const currentCameraLookAt = useRef(new THREE.Vector3(0, 0.95, 0));
@@ -197,6 +203,58 @@ export default function DanceJourneyCanvas({
     }, 1200);
     return () => clearTimeout(timeout);
   }, [triggerDanceEffect, currentScene]);
+
+  // Handle omnipresent global click interaction
+  useEffect(() => {
+    if (!clickTrigger || !cameraRef.current) return;
+    const normX = (clickTrigger.x / window.innerWidth) * 2 - 1;
+    const normY = -(clickTrigger.y / window.innerHeight) * 2 + 1;
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(new THREE.Vector2(normX, normY), cameraRef.current);
+
+    const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+    const hitPoint = new THREE.Vector3();
+    raycaster.ray.intersectPlane(groundPlane, hitPoint);
+
+    if (dynamicClickRingRef.current && hitPoint) {
+      dynamicClickRingRef.current.position.set(hitPoint.x, 0.012, hitPoint.z);
+      dynamicClickRingRef.current.scale.set(0.1, 0.1, 1);
+      clickRingScaleRef.current = 0.1;
+      (dynamicClickRingRef.current.material as THREE.MeshBasicMaterial).opacity = 0.95;
+      dynamicClickRingRef.current.visible = true;
+    }
+
+    // Dancer energetic choreographic reaction
+    if (actionRef.current) {
+      actionRef.current.setEffectiveTimeScale(2.3);
+      setTimeout(() => {
+        const config = SCENE_POSES[currentScene];
+        if (actionRef.current) {
+          actionRef.current.setEffectiveTimeScale(config.speed);
+        }
+      }, 750);
+    }
+
+    // Flash speech bubble over dancer
+    const reactions = [
+      '✨ Every line of code is a step!',
+      '⚡ 42ms low-latency execution!',
+      '💃 Bharatanatyam mudra in motion!',
+      '🚀 Redis atomic slot concurrency!',
+      '🧠 GenAI pipeline verified!',
+      '♪ Concurrency in cadence!',
+      '✦ Sub-millisecond tick stream!',
+      '🔥 Zero-downtime architecture!',
+      '🔔 Ghungroo beat detected!',
+      '⚛️ React 19 reactive rendering!',
+    ];
+    const chosen = reactions[Math.floor(Math.random() * reactions.length)];
+    setDancerDialogue({ text: chosen, id: clickTrigger.time });
+    const timer = setTimeout(() => {
+      setDancerDialogue((prev) => (prev?.id === clickTrigger.time ? null : prev));
+    }, 2400);
+    return () => clearTimeout(timer);
+  }, [clickTrigger, currentScene]);
 
   useEffect(() => {
     const container = mountRef.current;
@@ -332,6 +390,22 @@ export default function DanceJourneyCanvas({
     ripple.rotation.x = Math.PI / 2;
     ripple.position.y = 0.007;
     scene.add(ripple);
+
+    // Dynamic Click Ripple Ring on stage floor
+    const dynamicClickGeo = new THREE.RingGeometry(0.15, 0.22, 48);
+    const dynamicClickMat = new THREE.MeshBasicMaterial({
+      color: 0xfbbf24,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending,
+    });
+    const dynamicClickRing = new THREE.Mesh(dynamicClickGeo, dynamicClickMat);
+    dynamicClickRing.rotation.x = Math.PI / 2;
+    dynamicClickRing.position.y = 0.012;
+    dynamicClickRing.visible = false;
+    scene.add(dynamicClickRing);
+    dynamicClickRingRef.current = dynamicClickRing;
 
     // 5. Scene 3 Portal Ring (Tilted behind dancer)
     const portalGeo = new THREE.TorusGeometry(1.4, 0.04, 16, 64);
@@ -526,6 +600,17 @@ export default function DanceJourneyCanvas({
       ripple.scale.set(rippleScale, rippleScale, 1);
       (ripple.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 0.55 - (rippleScale - 0.8) * 0.5);
 
+      // Expand and fade dynamic click ripple ring on stage floor
+      if (dynamicClickRingRef.current && dynamicClickRingRef.current.visible) {
+        clickRingScaleRef.current += delta * 4.4;
+        const s = clickRingScaleRef.current;
+        dynamicClickRingRef.current.scale.set(s, s, 1);
+        (dynamicClickRingRef.current.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 0.95 - s * 0.28);
+        if (s > 3.4) {
+          dynamicClickRingRef.current.visible = false;
+        }
+      }
+
       // Rotate portal ring if visible
       if (portalMesh.visible) {
         portalMesh.rotation.z += delta * 0.4;
@@ -586,6 +671,8 @@ export default function DanceJourneyCanvas({
       ring2Mat.dispose();
       rippleGeo.dispose();
       rippleMat.dispose();
+      dynamicClickGeo.dispose();
+      dynamicClickMat.dispose();
       coneGeo.dispose();
       coneMat.dispose();
       particleGeo.dispose();
@@ -594,15 +681,23 @@ export default function DanceJourneyCanvas({
   }, []);
 
   return (
-    <div
-      ref={mountRef}
-      className="dance-journey-canvas-root"
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 1,
-        pointerEvents: 'none',
-      }}
-    />
+    <>
+      <div
+        ref={mountRef}
+        className="dance-journey-canvas-root"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+        }}
+      />
+      {dancerDialogue && (
+        <div className="michelle-floating-speech-bubble" key={dancerDialogue.id}>
+          <span className="bubble-sparkle">✦</span>
+          <span className="bubble-text">{dancerDialogue.text}</span>
+        </div>
+      )}
+    </>
   );
 }
