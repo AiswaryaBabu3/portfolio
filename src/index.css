@@ -82,6 +82,58 @@ body {
   overflow-x: hidden;
 }
 
+/* Dance Journey App Architecture */
+.dance-journey-app-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #050507;
+  color: #fdf2f8;
+  font-family: var(--font-sans);
+}
+
+.journey-scene-viewport {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.journey-bg-ambient {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.22;
+  z-index: 2;
+  animation: ambientFloat 14s ease-in-out infinite alternate;
+}
+
+.blob-ambient-1 {
+  width: 550px;
+  height: 550px;
+  top: -120px;
+  right: -80px;
+  background: radial-gradient(circle, #8b5cf6 0%, #d946ef 60%, transparent 80%);
+}
+
+.blob-ambient-2 {
+  width: 600px;
+  height: 600px;
+  bottom: -150px;
+  left: -100px;
+  background: radial-gradient(circle, #d946ef 0%, #24102f 60%, transparent 80%);
+  animation-delay: -7s;
+}
+
+@keyframes ambientFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.08); }
+  100% { transform: translate(-20px, 30px) scale(0.95); }
+}
+
 /* Custom Scrollbar in Ethereal Magenta */
 ::-webkit-scrollbar {
   width: 9px;
