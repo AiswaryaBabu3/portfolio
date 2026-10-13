@@ -101,6 +101,9 @@ class AmbientSoundscape {
 
       const freq = scale[noteIdx];
       const now = this.ctx.currentTime;
+      const yFactor = screenY !== undefined && typeof window !== 'undefined'
+        ? 0.5 + (1 - Math.min(Math.max(screenY / window.innerHeight, 0), 1)) * 0.5
+        : 1.0;
 
       // 1. Fundamental metallic sine tone
       const osc1 = this.ctx.createOscillator();
@@ -125,7 +128,7 @@ class AmbientSoundscape {
       osc2.type = 'triangle';
       osc2.frequency.setValueAtTime(freq * 2.76, now); // Natural bell overtone ratio
 
-      gain2.gain.setValueAtTime(0.02, now);
+      gain2.gain.setValueAtTime(0.02 * yFactor, now);
       gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
 
       osc2.connect(gain2);

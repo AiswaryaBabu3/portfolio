@@ -44,7 +44,6 @@ const VIBRANT_COLORS = ['#f472b6', '#fbbf24', '#8b5cf6', '#d946ef', '#06b6d4', '
 
 export default function GlobalInteractionEngine({ onCanvasTap }: GlobalInteractionEngineProps) {
   const [ripples, setRipples] = useState<ClickRipple[]>([]);
-  const trailRef = useRef<CursorNode[]>([]);
   const mousePosRef = useRef({ x: -100, y: -100 });
   const trailCanvasRef = useRef<HTMLCanvasElement>(null);
   const nextIdRef = useRef(1);
