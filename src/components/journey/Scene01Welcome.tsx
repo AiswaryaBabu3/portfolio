@@ -27,6 +27,19 @@ export default function Scene01Welcome({ onEnter }: Scene01Props) {
           <span>AN INTERACTIVE CHOREOGRAPHY</span>
         </motion.div>
 
+        <motion.div
+          className="welcome-hero-avatar-wrapper"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.25, duration: 0.8 }}
+        >
+          <img
+            src="/aishu_avatar.jpg"
+            alt="Aiswarya Babu"
+            className="welcome-avatar-img"
+          />
+        </motion.div>
+
         <motion.h1
           className="welcome-hero-name"
           initial={{ opacity: 0, y: 20 }}

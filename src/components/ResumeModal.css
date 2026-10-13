@@ -42,8 +42,19 @@
 
 .resume-header-title {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+}
+
+.resume-avatar-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f472b6;
+  box-shadow: 0 0 14px rgba(244, 114, 182, 0.45);
+  flex-shrink: 0;
 }
 
 .resume-eye-pill {

@@ -58,6 +58,9 @@ export default function JourneyHUD({
       {/* Top Header Bar */}
       <header className="hud-top-bar">
         <div className="hud-brand-block">
+          <div className="hud-avatar-badge">
+            <img src="/aishu_avatar.jpg" alt="Aiswarya Babu" className="hud-avatar-img" />
+          </div>
           <span className="hud-brand-name">AISHWARYA BABU</span>
           <span className="hud-brand-divider">/</span>
           <span className="hud-brand-tagline">MY CAREER IS A DANCE</span>

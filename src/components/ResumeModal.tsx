@@ -43,11 +43,14 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             {/* Header */}
             <div className="resume-modal-header">
               <div className="resume-header-title">
-                <span className="resume-eye-pill">
-                  <Eye size={16} />
-                  <span>Resume Preview</span>
-                </span>
-                <h3 className="resume-person-name">Aiswarya Babu — Senior Software Developer</h3>
+                <img src="/aishu_avatar.jpg" alt="Aiswarya Babu" className="resume-avatar-thumb" />
+                <div>
+                  <span className="resume-eye-pill">
+                    <Eye size={14} />
+                    <span>Resume Preview</span>
+                  </span>
+                  <h3 className="resume-person-name">Aiswarya Babu — Senior Software Developer</h3>
+                </div>
               </div>
 
               <div className="resume-header-actions">

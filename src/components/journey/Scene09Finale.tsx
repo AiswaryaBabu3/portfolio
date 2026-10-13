@@ -62,6 +62,14 @@ export default function Scene09Finale({ onRestart, onOpenResume }: Scene09Props)
 
         <div className="finale-divider-glow" />
 
+        <div className="finale-author-avatar-row">
+          <img src="/aishu_avatar.jpg" alt="Aiswarya Babu" className="finale-author-img" />
+          <div className="finale-author-meta">
+            <span className="finale-author-name">Aiswarya Babu</span>
+            <span className="finale-author-role">Choreographer of Distributed Systems</span>
+          </div>
+        </div>
+
         <h2 className="finale-call-heading">LET'S CREATE SOMETHING.</h2>
         <p className="finale-call-sub">
           Open for architectural opportunities, senior engineering roles, and high-impact distributed collaborations.

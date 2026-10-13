@@ -2089,3 +2089,149 @@
   }
 }
 
+/* ----------------------------------------------------
+   Aiswarya Babu Avatar Elements & Badges
+   ---------------------------------------------------- */
+.hud-avatar-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(135deg, #fbbf24, #f472b6, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(244, 114, 182, 0.45);
+  flex-shrink: 0;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hud-avatar-badge:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.65);
+}
+
+.hud-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.welcome-hero-avatar-wrapper {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 20px auto;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f472b6 50%, #8b5cf6 100%);
+  box-shadow: 0 0 32px rgba(244, 114, 182, 0.5), 0 0 16px rgba(251, 191, 36, 0.4);
+  animation: heroAvatarFloat 4s ease-in-out infinite;
+}
+
+@keyframes heroAvatarFloat {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 0 32px rgba(244, 114, 182, 0.5), 0 0 16px rgba(251, 191, 36, 0.4);
+  }
+  50% {
+    transform: translateY(-8px);
+    box-shadow: 0 0 45px rgba(244, 114, 182, 0.7), 0 0 24px rgba(251, 191, 36, 0.6);
+  }
+}
+
+.welcome-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-mini-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-profile-header-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 14px 0 20px 0;
+  padding: 12px 18px;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 16px;
+}
+
+.modal-profile-avatar-large {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fbbf24;
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.45);
+  flex-shrink: 0;
+}
+
+.modal-profile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.modal-profile-author-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.modal-profile-author-role {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fbbf24;
+  letter-spacing: 0.04em;
+}
+
+.finale-author-avatar-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.finale-author-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fbbf24;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+  flex-shrink: 0;
+}
+
+.finale-author-meta {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.finale-author-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.finale-author-role {
+  font-size: 12px;
+  color: rgba(251, 191, 36, 0.85);
+  font-weight: 500;
+}
+

@@ -105,7 +105,11 @@ export default function Scene03About({ onNext }: Scene03Props) {
             >
               <div className="card-header-row">
                 <div className="card-icon-bubble">
-                  <Icon size={18} />
+                  {card.key === 'profile' ? (
+                    <img src="/aishu_avatar.jpg" alt="Aiswarya Babu" className="card-mini-avatar-img" />
+                  ) : (
+                    <Icon size={18} />
+                  )}
                 </div>
                 <div className="card-titles">
                   <h3 className="card-title-text">{card.title}</h3>
@@ -157,6 +161,20 @@ export default function Scene03About({ onNext }: Scene03Props) {
                     <Icon size={20} />
                     <span>{card.title}</span>
                   </div>
+
+                  {card.key === 'profile' && (
+                    <div className="modal-profile-header-banner">
+                      <img
+                        src="/aishu_avatar.jpg"
+                        alt="Aiswarya Babu"
+                        className="modal-profile-avatar-large"
+                      />
+                      <div className="modal-profile-meta">
+                        <h4 className="modal-profile-author-name">Aiswarya Babu</h4>
+                        <span className="modal-profile-author-role">Senior Software Developer & Architect</span>
+                      </div>
+                    </div>
+                  )}
 
                   <h3 className="modal-heading">{card.subtitle}</h3>
                   <p className="modal-summary">{card.summary}</p>
