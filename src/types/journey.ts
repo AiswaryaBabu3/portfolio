@@ -15,7 +15,7 @@ export const SCENES: SceneMeta[] = [
   { number: 5, id: 'projects', name: 'Projects', subtitle: 'The Architecture Gallery' },
   { number: 6, id: 'experience', name: 'Experience', subtitle: 'The Illuminated Path' },
   { number: 7, id: 'beyond', name: 'Beyond Code', subtitle: 'Artistry & Passions' },
-  { number: 8, id: 'ai', name: 'Aishu AI', subtitle: 'The Intelligent Orb' },
+  { number: 8, id: 'ai', name: 'Aishu AI', subtitle: 'Interactive Assistant' },
   { number: 9, id: 'finale', name: 'Curtain Call', subtitle: 'Let\'s Create Something' },
 ];
 

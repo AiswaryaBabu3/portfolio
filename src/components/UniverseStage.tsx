@@ -145,8 +145,8 @@ export default function UniverseStage({ onOpenResume, onToggleClassicView }: Uni
     { label: '⚡ Fastify & Node', x: -420, y: 140 },
     { label: '☁️ AWS Cloud', x: 380, y: 120 },
     { label: '🐳 Docker Microservices', x: -280, y: 220 },
-    { label: '🪷 Nataraja Mudra', x: 260, y: -260 },
-    { label: '🔔 Ghungroo Beats', x: -220, y: -250 },
+    { label: '💃 Freestyle Dance', x: 260, y: -260 },
+    { label: '🎵 Rhythm & Beats', x: -220, y: -250 },
     { label: '✨ OpenAI GPT-4o', x: 320, y: 230 },
   ];
 
@@ -191,7 +191,7 @@ export default function UniverseStage({ onOpenResume, onToggleClassicView }: Uni
         mouseRotation={{ x: rotation.x / 40, y: rotation.y / 80 }}
       />
 
-      {/* 2. Classical Dance Silhouette Overlay */}
+      {/* 2. Freestyle Dance Silhouette Overlay */}
       <div className="universe-bg-dancer" />
 
       {/* 3. Theatrical Stage Spotlights */}
@@ -256,7 +256,7 @@ export default function UniverseStage({ onOpenResume, onToggleClassicView }: Uni
             <button
               className={`theme-dot-btn theme-dot-gold ${stageTheme === 'gold' ? 'active' : ''}`}
               onClick={() => setStageTheme('gold')}
-              title="Temple Gold"
+              title="Amber Gold"
             />
             <button
               className={`theme-dot-btn theme-dot-cyber ${stageTheme === 'cyber' ? 'active' : ''}`}
@@ -276,7 +276,7 @@ export default function UniverseStage({ onOpenResume, onToggleClassicView }: Uni
             onClick={onToggleClassicView}
             title="Switch to Linear Scroll Portfolio"
           >
-            <Scroll size={16} /> Classical View
+            <Scroll size={16} /> Standard View
           </button>
         </div>
       </header>
@@ -319,7 +319,7 @@ export default function UniverseStage({ onOpenResume, onToggleClassicView }: Uni
                   Aiswarya Babu <Sparkles size={14} color="#ec4899" />
                 </div>
                 <div className="performer-role">
-                  Full-Stack Software Engineer & Classical Dancer
+                  Full-Stack Software Engineer & Freestyle Dancer
                 </div>
               </div>
             </div>
@@ -441,7 +441,7 @@ export default function UniverseStage({ onOpenResume, onToggleClassicView }: Uni
                       {activePortal === 'contact' && 'Curtain Call: Audition & Connect'}
                     </h2>
                     <p className="chamber-subtitle">
-                      {activePortal === 'about' && 'Philosophy • Core Tech Stacks • Classical Artistry'}
+                      {activePortal === 'about' && 'Philosophy • Core Tech Stacks • Creative Artistry'}
                       {activePortal === 'projects' && 'Interactive 3D Stage Carousel & Live Applications'}
                       {activePortal === 'experience' && 'Everest Software • Quest Solutions • Education'}
                       {activePortal === 'contact' && 'Direct Message • Professional Socials • Inquiries'}

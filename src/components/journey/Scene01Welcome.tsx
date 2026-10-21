@@ -46,7 +46,7 @@ export default function Scene01Welcome({ onEnter }: Scene01Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.8 }}
         >
-          AISHWARYA BABU
+          AISWARYA BABU
         </motion.h1>
 
         <motion.h2

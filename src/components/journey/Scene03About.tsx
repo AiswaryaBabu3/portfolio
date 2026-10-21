@@ -25,7 +25,7 @@ const CARDS: CardData[] = [
     subtitle: 'The Craft & Ethos',
     icon: User,
     summary:
-      'Senior Software Developer architecting resilient backend microservices, real-time trading engines, and GenAI applications. Blends computer science rigor with classical artistic discipline.',
+      'Senior Software Developer architecting resilient backend microservices, real-time trading engines, and GenAI applications. Blends computer science rigor with creative, rhythmic flow.',
     bullets: [
       'Core focus: High-throughput Python & FastAPI backends',
       'Architectural mindset: Event-driven concurrency & distributed locks',
@@ -64,9 +64,9 @@ const CARDS: CardData[] = [
     subtitle: 'Cadence & Soul',
     icon: Heart,
     summary:
-      'Classical Bharatanatyam dancer with a deep love for rhythm, music, and chess. Believes discipline in movement reflects directly in elegant, well-tested code.',
+      'Passionate freestyle dancer with prizes won across dance competitions, and a deep love for rhythm, music, and chess. Believes the flow and energy of dance reflect directly in writing elegant, fluid code.',
     bullets: [
-      '10+ years practicing classical Indian dance',
+      'Award-winning freestyle dancer bringing high energy, musicality, and rhythm to everything',
       'Calm, analytical problem solver who thrives under production deadlines',
       'Empathetic teammate who champions clear documentation and clean APIs',
     ],

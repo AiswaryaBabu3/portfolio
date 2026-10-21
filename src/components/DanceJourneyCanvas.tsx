@@ -24,30 +24,30 @@ interface CameraPose {
 
 const SCENE_POSES: Record<SceneNumber, CameraPose> = {
   1: {
-    // The Stage (Welcome)
-    pos: [0, 1.35, 3.8],
-    target: [0, 0.95, 0],
-    dancerPos: [0, 0, 0],
-    dancerRotY: 0,
+    // The Stage (Welcome) - Dancer on right, intro typography on left
+    pos: [0, 1.35, 3.7],
+    target: [0.25, 0.95, 0],
+    dancerPos: [1.05, 0, 0],
+    dancerRotY: -0.2,
     lightLeftColor: 0x8b5cf6,
     lightRightColor: 0xd946ef,
     coneColor: 0x8b5cf6,
     speed: 0.85,
   },
   2: {
-    // Discover Me (Glides forward, floating words)
-    pos: [-0.9, 1.4, 3.2],
-    target: [0.2, 0.9, 0],
-    dancerPos: [0.35, 0, 0.1],
-    dancerRotY: -0.3,
+    // Discover Me (Glides forward, floating words) - Dancer on right
+    pos: [0, 1.35, 3.4],
+    target: [0.25, 0.9, 0],
+    dancerPos: [1.05, 0, 0.1],
+    dancerRotY: -0.25,
     lightLeftColor: 0xd946ef,
     lightRightColor: 0xf472b6,
     coneColor: 0xd946ef,
     speed: 1.0,
   },
   3: {
-    // About Me (Circular Portal Space)
-    pos: [0, 1.25, 3.9],
+    // About Me (Circular Portal Space) - Dancer in center framed by 4 cards
+    pos: [0, 1.25, 3.8],
     target: [0, 0.92, 0],
     dancerPos: [0, 0, -0.2],
     dancerRotY: 0,
@@ -58,9 +58,9 @@ const SCENE_POSES: Record<SceneNumber, CameraPose> = {
   },
   4: {
     // My Skills (Fast Choreography & Movement Trails)
-    pos: [0, 1.15, 3.2],
-    target: [0, 0.85, 0],
-    dancerPos: [0, 0, 0.1],
+    pos: [0, 1.45, 3.3],
+    target: [0, 0.95, 0],
+    dancerPos: [0, 0.08, 0],
     dancerRotY: 0.1,
     lightLeftColor: 0x06b6d4,
     lightRightColor: 0xa855f7,
@@ -68,55 +68,55 @@ const SCENE_POSES: Record<SceneNumber, CameraPose> = {
     speed: 1.3,
   },
   5: {
-    // Projects (Futuristic Gallery)
-    pos: [1.1, 1.45, 3.6],
-    target: [-0.2, 0.95, 0],
-    dancerPos: [-0.6, 0, 0],
-    dancerRotY: 0.45,
+    // Projects (Futuristic Gallery) - Dancer on left, gallery on right
+    pos: [0, 1.45, 3.6],
+    target: [-0.25, 0.95, 0],
+    dancerPos: [-1.05, 0, 0],
+    dancerRotY: 0.35,
     lightLeftColor: 0x8b5cf6,
     lightRightColor: 0x06b6d4,
     coneColor: 0x8b5cf6,
     speed: 1.0,
   },
   6: {
-    // Experience (Long Illuminated Path)
-    pos: [-1.4, 1.3, 3.4],
-    target: [0.2, 0.9, 0],
-    dancerPos: [0, 0, 0.3],
-    dancerRotY: -0.5,
+    // Experience (Long Illuminated Path) - Dancer on right
+    pos: [0, 1.35, 3.5],
+    target: [0.25, 0.9, 0],
+    dancerPos: [1.05, 0, 0.2],
+    dancerRotY: -0.3,
     lightLeftColor: 0xf59e0b,
     lightRightColor: 0xfbbf24,
     coneColor: 0xf59e0b,
     speed: 0.95,
   },
   7: {
-    // Beyond Code (Warm Champagne Gold)
-    pos: [0, 1.38, 3.7],
-    target: [0, 0.9, 0],
-    dancerPos: [0, 0, 0],
-    dancerRotY: 0.2,
+    // Beyond Code (Warm Champagne Gold) - Dancer on right
+    pos: [0, 1.35, 3.6],
+    target: [0.25, 0.9, 0],
+    dancerPos: [1.05, 0, 0],
+    dancerRotY: -0.2,
     lightLeftColor: 0xfbbf24,
     lightRightColor: 0xf472b6,
     coneColor: 0xfbbf24,
     speed: 0.85,
   },
   8: {
-    // AI Interaction (Floating Orb)
-    pos: [1.2, 1.25, 3.1],
+    // AI Interaction (Floating Orb) - Dancer on left with Orb
+    pos: [0, 1.3, 3.3],
     target: [-0.25, 0.95, 0],
-    dancerPos: [-0.5, 0, 0],
-    dancerRotY: 0.6,
+    dancerPos: [-1.05, 0, 0],
+    dancerRotY: 0.4,
     lightLeftColor: 0x06b6d4,
     lightRightColor: 0xd946ef,
     coneColor: 0x06b6d4,
     speed: 1.0,
   },
   9: {
-    // Contact / Finale (Grand Finale Stage)
+    // Contact / Finale (Grand Finale Stage) - Dancer prominently on right, card on left
     pos: [0, 1.35, 3.6],
-    target: [0, 0.92, 0],
-    dancerPos: [0, 0, 0],
-    dancerRotY: 0,
+    target: [0.25, 0.92, 0],
+    dancerPos: [1.05, 0, 0],
+    dancerRotY: -0.2,
     lightLeftColor: 0xf472b6,
     lightRightColor: 0xfbbf24,
     coneColor: 0xd946ef,
@@ -144,12 +144,14 @@ export default function DanceJourneyCanvas({
   const dynamicClickRingRef = useRef<THREE.Mesh | null>(null);
   const clickRingScaleRef = useRef(0);
   const [dancerDialogue, setDancerDialogue] = useState<{ text: string; id: number } | null>(null);
+  const stageGroupRef = useRef<THREE.Group | null>(null);
 
-  const targetCameraPos = useRef(new THREE.Vector3(0, 1.35, 3.8));
-  const targetCameraLookAt = useRef(new THREE.Vector3(0, 0.95, 0));
-  const currentCameraLookAt = useRef(new THREE.Vector3(0, 0.95, 0));
-  const targetDancerPos = useRef(new THREE.Vector3(0, 0, 0));
-  const targetDancerRotY = useRef(0);
+  const initialConfig = SCENE_POSES[currentScene] || SCENE_POSES[1];
+  const targetCameraPos = useRef(new THREE.Vector3(...initialConfig.pos));
+  const targetCameraLookAt = useRef(new THREE.Vector3(...initialConfig.target));
+  const currentCameraLookAt = useRef(new THREE.Vector3(...initialConfig.target));
+  const targetDancerPos = useRef(new THREE.Vector3(...initialConfig.dancerPos));
+  const targetDancerRotY = useRef(initialConfig.dancerRotY);
   const mouseOffset = useRef({ x: 0, y: 0 });
 
   // Update target coordinates and lighting whenever currentScene updates
@@ -184,9 +186,9 @@ export default function DanceJourneyCanvas({
       illuminatedPathRef.current.visible = currentScene === 6;
     }
 
-    // Toggle AI Orb visibility (Scene 8)
+    // Toggle AI Orb visibility (Disabled - clean view)
     if (aiOrbRef.current) {
-      aiOrbRef.current.visible = currentScene === 8;
+      aiOrbRef.current.visible = false;
     }
   }, [currentScene]);
 
@@ -239,13 +241,13 @@ export default function DanceJourneyCanvas({
     const reactions = [
       '✨ Every line of code is a step!',
       '⚡ 42ms low-latency execution!',
-      '💃 Bharatanatyam mudra in motion!',
+      '💃 Freestyle groove in motion!',
       '🚀 Redis atomic slot concurrency!',
       '🧠 GenAI pipeline verified!',
       '♪ Concurrency in cadence!',
       '✦ Sub-millisecond tick stream!',
       '🔥 Zero-downtime architecture!',
-      '🔔 Ghungroo beat detected!',
+      '🎵 Rhythm & flow detected!',
       '⚛️ React 19 reactive rendering!',
     ];
     const chosen = reactions[Math.floor(Math.random() * reactions.length)];
@@ -270,8 +272,9 @@ export default function DanceJourneyCanvas({
       0.1,
       100
     );
-    camera.position.set(0, 1.35, 3.8);
+    camera.position.set(...initialConfig.pos);
     cameraRef.current = camera;
+    camera.lookAt(...initialConfig.target);
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -290,24 +293,24 @@ export default function DanceJourneyCanvas({
     const ambientLight = new THREE.AmbientLight(0x24102f, 2.2);
     scene.add(ambientLight);
 
-    const initialPose = SCENE_POSES[1];
+    const initialPose = initialConfig;
 
     const spotLeft = new THREE.SpotLight(initialPose.lightLeftColor, 5.2);
-    spotLeft.position.set(-3.2, 4.8, 2.8);
+    spotLeft.position.set(initialConfig.dancerPos[0] - 3.2, 4.8, initialConfig.dancerPos[2] + 2.8);
     spotLeft.angle = Math.PI / 4.5;
     spotLeft.penumbra = 0.85;
     spotLeft.castShadow = true;
-    spotLeft.target.position.set(0, 0.8, 0);
+    spotLeft.target.position.set(initialConfig.dancerPos[0], 0.8, initialConfig.dancerPos[2]);
     scene.add(spotLeft);
     scene.add(spotLeft.target);
     spotLeftRef.current = spotLeft;
 
     const spotRight = new THREE.SpotLight(initialPose.lightRightColor, 4.8);
-    spotRight.position.set(3.2, 4.8, 2.8);
+    spotRight.position.set(initialConfig.dancerPos[0] + 3.2, 4.8, initialConfig.dancerPos[2] + 2.8);
     spotRight.angle = Math.PI / 4.5;
     spotRight.penumbra = 0.85;
     spotRight.castShadow = true;
-    spotRight.target.position.set(0, 0.8, 0);
+    spotRight.target.position.set(initialConfig.dancerPos[0], 0.8, initialConfig.dancerPos[2]);
     scene.add(spotRight);
     scene.add(spotRight.target);
     spotRightRef.current = spotRight;
@@ -317,12 +320,18 @@ export default function DanceJourneyCanvas({
     backLight.position.set(0, 3.5, -3.5);
     scene.add(backLight);
 
+    // 3. Stage Performance Group (Stage Floor, Rings, Lights, Portal Ring, Runway)
+    const stageGroup = new THREE.Group();
+    stageGroup.position.set(...initialConfig.dancerPos);
+    scene.add(stageGroup);
+    stageGroupRef.current = stageGroup;
+
     // Stage ground ambient point light
     const floorPointLight = new THREE.PointLight(0x8b5cf6, 2.0, 4.0);
     floorPointLight.position.set(0, 0.1, 0);
-    scene.add(floorPointLight);
+    stageGroup.add(floorPointLight);
 
-    // 3. Volumetric Holographic Light Cone
+    // Volumetric Holographic Light Cone
     const coneGeo = new THREE.CylinderGeometry(0.35, 1.85, 4.4, 32, 1, true);
     const coneMat = new THREE.MeshBasicMaterial({
       color: initialPose.coneColor,
@@ -334,7 +343,7 @@ export default function DanceJourneyCanvas({
     });
     const lightCone = new THREE.Mesh(coneGeo, coneMat);
     lightCone.position.set(0, 2.15, 0);
-    scene.add(lightCone);
+    stageGroup.add(lightCone);
     coneMeshRef.current = lightCone;
 
     // 4. Circular Futuristic Stage Floor & Concentric Rings
@@ -347,7 +356,7 @@ export default function DanceJourneyCanvas({
     const stageFloorMesh = new THREE.Mesh(stageFloorGeo, stageFloorMat);
     stageFloorMesh.position.y = -0.04;
     stageFloorMesh.receiveShadow = true;
-    scene.add(stageFloorMesh);
+    stageGroup.add(stageFloorMesh);
 
     // Ring 1 (Gold)
     const ring1Geo = new THREE.RingGeometry(1.52, 1.58, 64);
@@ -361,7 +370,7 @@ export default function DanceJourneyCanvas({
     const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
     ring1.rotation.x = Math.PI / 2;
     ring1.position.y = 0.005;
-    scene.add(ring1);
+    stageGroup.add(ring1);
 
     // Ring 2 (Violet)
     const ring2Geo = new THREE.RingGeometry(1.22, 1.27, 64);
@@ -375,7 +384,7 @@ export default function DanceJourneyCanvas({
     const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
     ring2.rotation.x = Math.PI / 2;
     ring2.position.y = 0.006;
-    scene.add(ring2);
+    stageGroup.add(ring2);
 
     // Expanding Ripple Ring
     const rippleGeo = new THREE.RingGeometry(0.8, 0.85, 64);
@@ -389,7 +398,7 @@ export default function DanceJourneyCanvas({
     const ripple = new THREE.Mesh(rippleGeo, rippleMat);
     ripple.rotation.x = Math.PI / 2;
     ripple.position.y = 0.007;
-    scene.add(ripple);
+    stageGroup.add(ripple);
 
     // Dynamic Click Ripple Ring on stage floor
     const dynamicClickGeo = new THREE.RingGeometry(0.15, 0.22, 48);
@@ -404,7 +413,7 @@ export default function DanceJourneyCanvas({
     dynamicClickRing.rotation.x = Math.PI / 2;
     dynamicClickRing.position.y = 0.012;
     dynamicClickRing.visible = false;
-    scene.add(dynamicClickRing);
+    stageGroup.add(dynamicClickRing);
     dynamicClickRingRef.current = dynamicClickRing;
 
     // 5. Scene 3 Portal Ring (Tilted behind dancer)
@@ -418,7 +427,7 @@ export default function DanceJourneyCanvas({
     const portalMesh = new THREE.Mesh(portalGeo, portalMat);
     portalMesh.position.set(0, 1.2, -0.6);
     portalMesh.visible = false;
-    scene.add(portalMesh);
+    stageGroup.add(portalMesh);
     portalRingRef.current = portalMesh;
 
     // 6. Scene 6 Illuminated Path (Linear glowing runway markers)
@@ -438,35 +447,12 @@ export default function DanceJourneyCanvas({
       pathGroup.add(stepMesh);
     }
     pathGroup.visible = false;
-    scene.add(pathGroup);
+    stageGroup.add(pathGroup);
     illuminatedPathRef.current = pathGroup;
 
-    // 7. Scene 8 AI Orb (Glowing Floating Orb)
+    // 7. Scene 8 AI Orb (Removed to keep scene clean and unobscured)
     const orbGroup = new THREE.Group();
-    const coreOrbGeo = new THREE.SphereGeometry(0.24, 32, 32);
-    const coreOrbMat = new THREE.MeshStandardMaterial({
-      color: 0x06b6d4,
-      emissive: 0x06b6d4,
-      emissiveIntensity: 1.2,
-      roughness: 0.1,
-      metalness: 0.9,
-    });
-    const coreOrb = new THREE.Mesh(coreOrbGeo, coreOrbMat);
-    orbGroup.add(coreOrb);
-
-    const haloOrbGeo = new THREE.SphereGeometry(0.32, 32, 32);
-    const haloOrbMat = new THREE.MeshBasicMaterial({
-      color: 0xd946ef,
-      transparent: true,
-      opacity: 0.35,
-      blending: THREE.AdditiveBlending,
-    });
-    const haloOrb = new THREE.Mesh(haloOrbGeo, haloOrbMat);
-    orbGroup.add(haloOrb);
-
-    orbGroup.position.set(0.65, 1.35, 0.4);
     orbGroup.visible = false;
-    scene.add(orbGroup);
     aiOrbRef.current = orbGroup;
 
     // 8. Stardust Floating Particles Vortex (160 particles)
@@ -512,7 +498,12 @@ export default function DanceJourneyCanvas({
       (gltf) => {
         const model = gltf.scene;
         model.scale.setScalar(1.08);
-        model.position.set(0, 0, 0);
+        model.position.set(
+          targetDancerPos.current.x,
+          targetDancerPos.current.y,
+          targetDancerPos.current.z
+        );
+        model.rotation.y = targetDancerRotY.current;
 
         model.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
@@ -530,7 +521,7 @@ export default function DanceJourneyCanvas({
 
           const danceClip = gltf.animations[0];
           const action = mixer.clipAction(danceClip);
-          action.setEffectiveTimeScale(SCENE_POSES[1].speed);
+          action.setEffectiveTimeScale(initialConfig.speed);
           action.play();
           actionRef.current = action;
         }
@@ -580,10 +571,25 @@ export default function DanceJourneyCanvas({
       currentCameraLookAt.current.z += (tgtLook.z - currentCameraLookAt.current.z) * 0.05;
       camera.lookAt(currentCameraLookAt.current);
 
+      // Smooth stage group & spotlights transition to follow dancer target
+      const tgtDancer = targetDancerPos.current;
+      if (stageGroupRef.current) {
+        stageGroupRef.current.position.x += (tgtDancer.x - stageGroupRef.current.position.x) * 0.04;
+        stageGroupRef.current.position.z += (tgtDancer.z - stageGroupRef.current.position.z) * 0.04;
+
+        if (spotLeftRef.current && spotRightRef.current) {
+          const curX = stageGroupRef.current.position.x;
+          const curZ = stageGroupRef.current.position.z;
+          spotLeftRef.current.position.set(curX - 3.2, 4.8, curZ + 2.8);
+          spotLeftRef.current.target.position.set(curX, 0.8, curZ);
+          spotRightRef.current.position.set(curX + 3.2, 4.8, curZ + 2.8);
+          spotRightRef.current.target.position.set(curX, 0.8, curZ);
+        }
+      }
+
       // Smooth dancer position & rotation transition
       if (dancerModelRef.current) {
         const dModel = dancerModelRef.current;
-        const tgtDancer = targetDancerPos.current;
         dModel.position.x += (tgtDancer.x - dModel.position.x) * 0.04;
         dModel.position.y += (tgtDancer.y - dModel.position.y) * 0.04;
         dModel.position.z += (tgtDancer.z - dModel.position.z) * 0.04;
@@ -616,10 +622,9 @@ export default function DanceJourneyCanvas({
         portalMesh.rotation.z += delta * 0.4;
       }
 
-      // Animate AI Orb bob and pulse if visible
+      // Animate AI Orb bob if visible
       if (orbGroup.visible) {
         orbGroup.position.y = 1.35 + Math.sin(clock.getElapsedTime() * 2.5) * 0.08;
-        haloOrb.scale.setScalar(1.0 + Math.sin(clock.getElapsedTime() * 4) * 0.12);
       }
 
       // Rotate light cone subtly
@@ -627,14 +632,16 @@ export default function DanceJourneyCanvas({
         coneMeshRef.current.rotation.y += delta * 0.15;
       }
 
-      // Animate stardust particles
+      // Animate stardust particles around current stage position
+      const stageX = stageGroupRef.current ? stageGroupRef.current.position.x : 0;
+      const stageZ = stageGroupRef.current ? stageGroupRef.current.position.z : 0;
       const pArr = particleGeo.attributes.position.array as Float32Array;
       for (let i = 0; i < particleCount; i++) {
         const sp = particleSpeeds[i];
         sp.angle += sp.rotSpeed;
-        pArr[i * 3] = Math.cos(sp.angle) * sp.radius;
+        pArr[i * 3] = stageX + Math.cos(sp.angle) * sp.radius;
         pArr[i * 3 + 1] += sp.y;
-        pArr[i * 3 + 2] = Math.sin(sp.angle) * sp.radius;
+        pArr[i * 3 + 2] = stageZ + Math.sin(sp.angle) * sp.radius;
         if (pArr[i * 3 + 1] > 3.5) pArr[i * 3 + 1] = 0.05;
       }
       particleGeo.attributes.position.needsUpdate = true;

@@ -218,10 +218,10 @@ export const SKILLS_DATA: SkillNode[] = [
 export const BEYOND_CODE_DATA = [
   {
     id: 'dance',
-    title: 'Classical Dance',
-    subtitle: 'Bharatanatyam & Rhythm',
+    title: 'Freestyle Dance',
+    subtitle: 'Rhythm, Energy & Flow',
     quote: 'Dance taught me that complexity is simply rhythm waiting to be mastered.',
-    details: '10+ years exploring the geometric precision, footwork rhythms, and emotional storytelling of classical dance. The exact same discipline translates into writing harmonious, bug-free software architecture.',
+    details: 'Award-winning freestyle dancer passionate about musicality, dynamic energy, and self-expression. The rhythm and creative flow of dance translate directly into writing harmonious, fluid software architecture.',
     icon: '💃',
   },
   {
@@ -229,7 +229,7 @@ export const BEYOND_CODE_DATA = [
     title: 'Music & Cadence',
     subtitle: 'Rhythm, Beats & Harmony',
     quote: 'Every line of code has a tempo; every microservice is a voice in an orchestra.',
-    details: 'Fascinated by rhythm structures, ghungroo beats, and ambient soundscapes. I often listen to acoustic rhythms while architecting distributed database locks.',
+    details: 'Fascinated by rhythm structures, energetic beats, and ambient soundscapes. I often listen to acoustic rhythms and beats while architecting distributed database locks.',
     icon: '🎵',
   },
   {
@@ -260,33 +260,33 @@ export const BEYOND_CODE_DATA = [
 
 export const AI_KNOWLEDGE_BASE: { question: string; answer: string; keywords: string[] }[] = [
   {
-    question: 'What does Aishwarya do?',
+    question: 'What does Aiswarya do?',
     keywords: ['what', 'do', 'role', 'developer', 'who'],
     answer:
-      'Aishwarya Babu is a Senior Software Developer with over 2.5 years of hands-on production experience. She specializes in building high-throughput backend services, distributed microservices, multi-tenant SaaS platforms, and cutting-edge GenAI integrations using Python, FastAPI, React, and TypeScript. She is also a passionate classical dancer who brings rhythmic precision and mathematical harmony to software architecture.',
+      'Aiswarya Babu is a Senior Software Developer with over 2.5 years of hands-on production experience. She specializes in building high-throughput backend services, distributed microservices, multi-tenant SaaS platforms, and cutting-edge GenAI integrations using Python, FastAPI, React, and TypeScript. She is also an award-winning dancer passionate about freestyle and rhythm, bringing creative flow and energy to software architecture.',
   },
   {
     question: 'What is her strongest technology?',
     keywords: ['strongest', 'technology', 'skills', 'best', 'tech'],
     answer:
-      'Aishwarya\'s strongest core stack centers on Python & FastAPI for high-performance backend microservices (under 50ms latency), PostgreSQL & SQLAlchemy for resilient data models, Redis & WebSockets for real-time concurrency, and React 19 / TypeScript for reactive frontends. She also has deep applied experience orchestrating LLMs (GPT-4o) with strict schema validation.',
+      'Aiswarya\'s strongest core stack centers on Python & FastAPI for high-performance backend microservices (under 50ms latency), PostgreSQL & SQLAlchemy for resilient data models, Redis & WebSockets for real-time concurrency, and React 19 / TypeScript for reactive frontends. She also has deep applied experience orchestrating LLMs (GPT-4o) with strict schema validation.',
   },
   {
     question: 'Tell me about Everest Tutoring.',
     keywords: ['everest', 'tutoring', 'project', 'edtech'],
     answer:
-      'Everest Tutoring is an end-to-end multi-tenant EdTech platform Aishwarya architected. She built an atomic slot-booking engine with distributed Redis locks that eliminated scheduling conflicts, integrated multi-currency payments, and connected live WebSocket notification feeds. The platform achieved 99.98% booking accuracy and supports 10,000+ monthly sessions.',
+      'Everest Tutoring is an end-to-end multi-tenant EdTech platform Aiswarya architected. She built an atomic slot-booking engine with distributed Redis locks that eliminated scheduling conflicts, integrated multi-currency payments, and connected live WebSocket notification feeds. The platform achieved 99.98% booking accuracy and supports 10,000+ monthly sessions.',
   },
   {
     question: 'Tell me about Investaa Trading.',
     keywords: ['investaa', 'trading', 'oms', 'fyers', 'algo'],
     answer:
-      'Investaa is a low-latency Algorithmic Order Management System (OMS) Aishwarya engineered. It connects directly to Fyers APIs with resilient WebSocket market tick streams (1,500+ ticks/sec) and sub-50ms execution queues, featuring automated pre-trade risk controls and paper trading simulations.',
+      'Investaa is a low-latency Algorithmic Order Management System (OMS) Aiswarya engineered. It connects directly to Fyers APIs with resilient WebSocket market tick streams (1,500+ ticks/sec) and sub-50ms execution queues, featuring automated pre-trade risk controls and paper trading simulations.',
   },
   {
     question: 'Why should I hire her?',
     keywords: ['hire', 'why', 'strengths', 'value', 'join'],
     answer:
-      'You should hire Aishwarya because she brings rare end-to-end architectural maturity paired with artistic discipline. She doesn\'t just write code — she designs resilient systems that withstand production loads, thinks proactively about race conditions and latency, and communicates with empathy and clarity. Her classical dance background gives her immense focus, stamina, and attention to detail.',
+      'You should hire Aiswarya because she brings rare end-to-end architectural maturity paired with creative energy and discipline. She doesn\'t just write code — she designs resilient systems that withstand production loads, thinks proactively about race conditions and latency, and communicates with empathy and clarity. Her dance background gives her immense focus, stamina, rhythm, and attention to detail.',
   },
 ];

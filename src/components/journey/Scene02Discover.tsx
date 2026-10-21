@@ -51,7 +51,7 @@ export default function Scene02Discover({ onNext }: Scene02Props) {
       >
         <span className="discover-badge">SCENE 02 • DISCOVER</span>
 
-        <h2 className="discover-title">Aishwarya Babu</h2>
+        <h2 className="discover-title">Aiswarya Babu</h2>
         <h3 className="discover-role">Senior Software Developer</h3>
 
         <div className="discover-stats-row">

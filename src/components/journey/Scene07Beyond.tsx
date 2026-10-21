@@ -22,7 +22,7 @@ export default function Scene07Beyond({ onNext }: Scene07Props) {
         </span>
         <h2 className="scene-main-heading">Artistry, Cadence & Passions</h2>
         <p className="scene-sub-heading">
-          The discipline of classical dance and creative rhythm that informs every engineering decision
+          The energy of freestyle dance, creative rhythm, and musicality that informs every engineering decision
         </p>
       </div>
 

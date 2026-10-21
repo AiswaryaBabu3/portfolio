@@ -39,7 +39,7 @@ const THEMES: Record<LightTheme, ThemeConfig> = {
     accentHex: '#ec4899',
   },
   gold: {
-    name: 'Temple Gold',
+    name: 'Amber Gold',
     leftColor: 0xf59e0b,
     rightColor: 0xfbbf24,
     coneColor: 0xfbbf24,

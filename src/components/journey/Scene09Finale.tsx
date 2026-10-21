@@ -181,7 +181,7 @@ export default function Scene09Finale({ onRestart, onOpenResume }: Scene09Props)
                 <span className="contact-eyebrow">
                   <Sparkles size={13} style={{ color: '#fbbf24' }} /> CURTAIN CALL
                 </span>
-                <h3 className="contact-heading">Send a Message to Aishwarya</h3>
+                <h3 className="contact-heading">Send a Message to Aiswarya</h3>
                 <p className="contact-sub">
                   Direct message dispatch or reach out via aiswaryababu544@gmail.com
                 </p>
@@ -191,7 +191,7 @@ export default function Scene09Finale({ onRestart, onOpenResume }: Scene09Props)
                 <div className="contact-success-state">
                   <CheckCircle2 size={42} style={{ color: '#10b981' }} />
                   <h4>Message Dispatched Gracefully</h4>
-                  <p>Thank you. Aishwarya will respond promptly to your invitation.</p>
+                  <p>Thank you. Aiswarya will respond promptly to your invitation.</p>
                 </div>
               ) : (
                 <form className="contact-form" onSubmit={handleContactSubmit}>

@@ -35,11 +35,11 @@ const REACTION_BADGES = [
   '🚀 Sub-50ms!',
   '🧠 GenAI in Motion!',
   '✦ Flow!',
-  '🔔 Ghungroo Spark!',
+  '🎵 Rhythm Spark!',
   '⚛️ React 19 Pulse!',
 ];
 
-const PARTICLE_SYMBOLS = ['✦', '♪', '♫', '⚡', '•', '★', 'λ', '🔔', '✨'];
+const PARTICLE_SYMBOLS = ['✦', '♪', '♫', '⚡', '•', '★', 'λ', '🎵', '✨'];
 const VIBRANT_COLORS = ['#f472b6', '#fbbf24', '#8b5cf6', '#d946ef', '#06b6d4', '#ec4899'];
 
 export default function GlobalInteractionEngine({ onCanvasTap }: GlobalInteractionEngineProps) {

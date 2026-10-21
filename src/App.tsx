@@ -15,6 +15,7 @@ import Scene08AIOrb from './components/journey/Scene08AIOrb';
 import Scene09Finale from './components/journey/Scene09Finale';
 import ResumeModal from './components/ResumeModal';
 import GlobalInteractionEngine from './components/GlobalInteractionEngine';
+import AishuChatbot from './components/AishuChatbot';
 import './index.css';
 
 export default function App() {
@@ -188,6 +189,9 @@ export default function App() {
 
       {/* Resume Modal */}
       <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
+
+      {/* Floating Omnipresent Aishu AI Assistant (Ollama Powered) */}
+      <AishuChatbot onOpenResume={() => setIsResumeOpen(true)} />
     </div>
   );
 }

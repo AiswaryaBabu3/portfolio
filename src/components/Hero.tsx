@@ -103,7 +103,7 @@ export default function Hero(_props: HeroProps = {}) {
             <img src={avatarImg} alt="Aiswarya Babu" className="badge-profile-thumb" />
             <span className="stage-badge-pulse" />
             <Sparkles size={14} style={{ color: '#fbbf24' }} />
-            <span>Senior Software Engineer • Classical Dancer</span>
+            <span>Senior Software Engineer • Freestyle Dancer</span>
           </motion.div>
 
           <motion.h1 className="stage-main-title" variants={itemVariants}>
@@ -211,10 +211,10 @@ export default function Hero(_props: HeroProps = {}) {
             className="holo-orbit-badge badge-orbit-bottom"
             variants={floatVariants2}
             animate="animate"
-            title="Classical Dance & Rhythmic Precision"
+            title="Freestyle Dance & Creative Rhythm"
           >
             <span className="badge-icon">💃</span>
-            <span className="badge-text">Classical Dance & Art</span>
+            <span className="badge-text">Freestyle Dance & Rhythm</span>
           </motion.div>
         </motion.div>
 
